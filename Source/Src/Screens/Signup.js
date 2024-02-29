@@ -43,7 +43,7 @@ const Signup = () => {
     >
       {({ errors, touched, values, handleChange, setFieldTouched, handleSubmit, isValid }) => (
        
-       
+       <KeyboardAvoidingView  style={{ flex: 1 }} behavior={'padding'}>
        <SafeAreaView style={styles.container}>
           
 
@@ -51,7 +51,7 @@ const Signup = () => {
             <ScrollView style={styles.box} showsVerticalScrollIndicator={false}>
               <Image source={require('../../Assets/Images/Logo.jpg')} style={styles.Image} />
               <Text style={styles.Heading}>Signup</Text>
-              <KeyboardAvoidingView style={styles.keyboardAvoidingView} behavior={'padding'} keyboardVerticalOffset={100}>
+            
 
             
               <CustomTextinput
@@ -137,11 +137,11 @@ const Signup = () => {
               />
 
               <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: 'black' }]}>You Have Account?</Text>
-              <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: '#4287f5', marginBottom: 20}]} onPress={() => navigation.navigate('Login')}>Login</Text>
-              </KeyboardAvoidingView>
+              <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: '#4287f5', paddingBottom: 60}]} onPress={() => navigation.navigate('Login')}>Login</Text>
             </ScrollView>
         
         </SafeAreaView>
+              </KeyboardAvoidingView>
       )}
     </Formik>
   );
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   box: {
     backgroundColor: "white",
     width: '85%',
-    height: Height * 0.87,
+    height:'90%',
     alignSelf: 'center',
     padding: 20,
     position: 'absolute',
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.57,
     shadowRadius: 15.19,
     elevation: 23,
-    bottom:20
+    // bottom:20
   },
   Heading: {
     fontSize: 18,

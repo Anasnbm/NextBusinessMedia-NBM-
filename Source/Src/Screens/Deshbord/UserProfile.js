@@ -9,7 +9,7 @@ const UserProfile = () => {
     
     <View style={styles.container}>
       <Text style={CommonStyles.boldText}>My Profile</Text>
-      <Image source={require('../../../Assets/Images/user.jpg')} style={{ height: 100, width: 100, borderRadius: 65 }} />
+      <Image source={require('../../../Assets/Images/userimage.jpg')} style={{ height: 100, width: 100, borderRadius: 65 }} />
       <Text style={CommonStyles.boldText}>vender Dusan</Text>
       <Text style={CommonStyles.text}>Product Manager At Google silicon Vally</Text>
       <Text style={CommonStyles.boldText}>abc@gmail.com</Text>

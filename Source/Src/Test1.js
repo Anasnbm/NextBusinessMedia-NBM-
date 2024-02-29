@@ -14,7 +14,7 @@ const Test1 = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../Assets/Images/Home.jpg')} resizeMode='contain' style={{height:Height*0.5,width:Width}}/>
+      <Image source={require('../Assets/Images/agree.jpg')} resizeMode='contain' style={{height:Height*0.5,width:Width}}/>
       <View style={styles.box}>
         <Text style={styles.Heading}>Login</Text>
         <CustomTextinput PlaceHolder={'Enter Your Email'} icons={require('../Assets/Images/user.png')}/>

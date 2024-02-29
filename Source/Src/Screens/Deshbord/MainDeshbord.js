@@ -53,7 +53,7 @@ const MainDeshbord = () => {
             borderBottomWidth: 1,
             backgroundColor: '#34ebde'
           }}>
-            <Image source={require('../../../Assets/Images/user.jpg')} style={{ height: 100, width: 100, borderRadius: 65 }} />
+            <Image source={require('../../../Assets/Images/userimage.jpg')} style={{ height: 100, width: 100, borderRadius: 65 }} />
           </View>
           <DrawerItemList{...props} />
         </SafeAreaView>
@@ -64,19 +64,19 @@ const MainDeshbord = () => {
           <MaterialCommunityIcons name="home-outline" color={color} size={size} />
         ),
       }} />
-     
+
       {/* <Drawer.Screen name="Settings" component={EmptyScreen} /> */}
-      <Drawer.Screen name="Calender" component={UpcommingEvents}  options={{
+      <Drawer.Screen name="Calender" component={UpcommingEvents} options={{
         drawerIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="calendar" color={color} size={size} />
         ),
       }} />
-       <Drawer.Screen name="Aboutus" component={Aboutus}  options={{
+      <Drawer.Screen name="Aboutus" component={Aboutus} options={{
         drawerIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="alpha-a-box" color={color} size={size} />
         ),
       }} />
-       <Drawer.Screen name="Signout" component={EmptyScreen} options={{
+      <Drawer.Screen name="Signout" component={EmptyScreen} options={{
         drawerIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="file-replace-outline" color={color} size={size} />
         ),
