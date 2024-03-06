@@ -21,7 +21,7 @@ const DetailsInformation = () => {
       />
       <View style={{ position: 'absolute', padding: 10 }}>
 
-        <CustomHeader back={true} left={true} onPress={() => navigation.goBack()} />
+        <CustomHeader back={true} left={true} OnPress={() => navigation.goBack()} />
       </View>
       <View style={{bottom:45, paddingHorizontal: 15,}}>
         <Image source={{ uri: route.params.data.thumbnail }} style={{ height: 100, width: 100,borderRadius:15 }} />

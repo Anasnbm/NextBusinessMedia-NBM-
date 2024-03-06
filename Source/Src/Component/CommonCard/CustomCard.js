@@ -1,9 +1,10 @@
-import { Dimensions, FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Dimensions, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useEffect } from 'react';
 import { COLORS, Font } from '../../Theme/Colors';
 import { useNavigation } from '@react-navigation/native';
 
 import { CardApi } from '../../ApiData';
+import { Banner } from 'react-native-paper';
 
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
@@ -11,16 +12,17 @@ const Height = Dimensions.get('window').height;
 // const ApiData=async()=>{
 //   const fetchdata=axios.get(CardApi)
 // }
-const CustomCard = ({ data, heading, RenderId }) => {
- 
-  
-  const navigation=useNavigation()
+const CustomCard = ({ data, heading, RenderId, }) => {
+
+
+  const navigation = useNavigation()
   const renderItem = ({ item }) => {
     if (RenderId === 1) {
       return (
         <View style={styles.cardContainer}>
-          <TouchableOpacity style={{ alignItems: "center", paddingHorizontal: 10, gap: 5 }}
-           >
+          <TouchableOpacity
+            style={{ alignItems: "center", paddingHorizontal: 10, gap: 5 }}
+            onPress={() => navigation.navigate(item.screen)} >
             <Image source={item.image} style={styles.image} />
             <Text style={styles.location}>{item.Location}</Text>
             <Text style={styles.date}>{item.Date}</Text>
@@ -31,29 +33,50 @@ const CustomCard = ({ data, heading, RenderId }) => {
       return (
         <View style={styles.cardContainer}>
           <TouchableOpacity style={{ alignItems: "center", paddingHorizontal: 10, gap: 5 }}
-          onPress={()=>navigation.navigate('DetailsInformation',{
-            data:item
-          })}>
-          <Image source={{ uri: item.thumbnail }} style={styles.image1} />
+            onPress={() => navigation.navigate('DetailsInformation', {
+              data: item
+            })}>
+            <Image source={{ uri: item.thumbnail }} style={styles.image1} />
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.description}>{item.category}</Text>
           </TouchableOpacity>
         </View>
       );
-    } 
+    }
     else if (RenderId === 3) {
       return (
         <View style={styles.cardContainer}>
           <TouchableOpacity style={{ alignItems: "center", paddingHorizontal: 10, gap: 5 }}
-           onPress={()=>navigation.navigate('DetailsInformation',{
-            data:item
-          })}>
-          <Image source={{uri: item.thumbnail }} style={styles.image1} />
+            onPress={() => navigation.navigate('DetailsInformation', {
+              data: item
+            })}>
+            <Image source={{ uri: item.thumbnail }} style={styles.image1} />
             <Text style={styles.title}>{item.title}</Text>
             {/* <Text style={styles.description}>{item.Designation}</Text> */}
           </TouchableOpacity>
         </View>
       );
+    }
+    else if (RenderId === 4) {
+      return (
+        <View style={[styles.cardContainer, { justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', gap: 70 }]}>
+          <TouchableOpacity
+            style={{}}
+            onPress={() => navigation.navigate('DetailsInformation', { data: item })}
+          >
+
+            <Image
+              source={item.image}
+              style={[styles.image1, { height: 60, width: Width * 0.5, resizeMode: 'contain' }]}
+            />
+
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('DetailsInformation', { data: item })}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: COLORS.green }}>See All</Text>
+          </TouchableOpacity>
+        </View>
+      );
+
     } else {
       return null;
     }
@@ -121,11 +144,11 @@ const styles = StyleSheet.create({
     fontFamily: Font.regular,
     textAlign: "center"
   },
-  image1:{
-    height:Height*0.10,
-    width:Width*0.22,
-    marginTop:10,
-    borderRadius:15
+  image1: {
+    height: Height * 0.10,
+    width: Width * 0.22,
+    marginTop: 10,
+    borderRadius: 15
   }
 });
 

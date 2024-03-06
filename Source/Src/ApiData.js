@@ -7,14 +7,14 @@ const ApiData = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://dummyjson.com/products');
-        console.log(response.data); // Log the fetched data to the console
+        console.log(response); // Log the fetched data to the console
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
-    fetchData(); // Call the fetchData function when the component mounts
-  }, []); // Pass an empty dependency array to useEffect to run the effect only once
+    fetchData(); //
+  }, []); //
 
   return (
     <View style={styles.container}>

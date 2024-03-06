@@ -13,6 +13,7 @@ import { DrawerItemList, createDrawerNavigator } from '@react-navigation/drawer'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import UpcommingEvents from './UpcommingEvents';
 import Aboutus from '../Aboutus';
+import Agenda from './Agenda';
 
 
 
@@ -119,7 +120,7 @@ function BottomTab() {
         <Tab.Screen name="Home" component={Home} options={{
           title: 'Home',
           headerStyle: {
-            backgroundColor: COLORS.green,
+            backgroundColor: COLORS.primery,
 
           },
           headerTintColor: '#fff',
@@ -151,19 +152,27 @@ function BottomTab() {
           ),
           // You can add headerRight for a right-side icon similarly
         }} />
-        <Tab.Screen name="Conferences" component={Conferences} options={{
-          tabBarLabel: 'Conferences',
+       
+         <Tab.Screen name="Agenda" component={Agenda} options={{
+          tabBarLabel: 'Agenda',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account-multiple-plus-outline" color={color} size={size} />
+            <MaterialCommunityIcons name="calendar" color={color} size={size} />
           ),
+         
         }} />
-        <Tab.Screen name="Message" component={Message}
+        {/* <Tab.Screen name="Message" component={Message}
           options={{
             tabBarLabel: 'Message',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="comment-text" color={color} size={size} />
             ),
-          }} />
+          }} /> */}
+           <Tab.Screen name="Conferences" component={Conferences} options={{
+          tabBarLabel: 'Networking',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account-multiple-plus-outline" color={color} size={size} />
+          ),
+        }} />
         <Tab.Screen name="UserProfile" component={UserProfile}
           options={{
             tabBarLabel: 'User',
@@ -171,7 +180,8 @@ function BottomTab() {
               <MaterialCommunityIcons name="account" color={color} size={size} />
             ),
           }} />
-      </Tab.Navigator></>
+      </Tab.Navigator>
+      </>
   )
 }
 

@@ -5,7 +5,9 @@ export const COLORS = {
     black: "#000000",
     blue:'#4287f5',
     red:'#FF0000',
-    green:'#30ee00'
+    green:'#74AE0F',
+    primery:'#74AE0F'
+    
     };
 
 export const Font = {

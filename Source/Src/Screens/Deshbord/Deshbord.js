@@ -10,27 +10,51 @@ const data = [
   {
     id: 1,
     Icon: require('../../../Assets/Images/home.png'),
-    text: 'Agriculture Tech',
+    text: 'AgriTech',
     screen: 'MainDeshbord'
   },
   {
     id: 2,
     Icon: require('../../../Assets/Images/student-bag.png'),
-    text: 'Fintech',
+    text: 'FinTech',
     screen: ''
   },
   {
     id: 3,
     Icon: require('../../../Assets/Images/insurance.png'),
-    text: 'Prop Tech',
+    text: 'PropTech',
     screen: ''
   },
   {
     id: 4,
     Icon: require('../../../Assets/Images/it.png'),
-    text: 'IT',
+    text: 'AfricaIT',
     screen: ''
-  }
+  },
+  {
+    id: 5,
+    Icon: require('../../../Assets/Images/logistic.png'),
+    text: 'Transport & \n Logistic',
+    screen: ''
+  },
+  {
+    id: 6,
+    Icon: require('../../../Assets/Images/urban-planning.png'),
+    text: 'Urban Planning',
+    screen: ''
+  },
+  {
+    id: 7,
+    Icon: require('../../../Assets/Images/renewable-energy.png'),
+    text: 'EnergyNext',
+    screen: ''
+  },
+  {
+    id: 8,
+    Icon: require('../../../Assets/Images/dish.png'),
+    text: 'FoodNext',
+    screen: ''
+  },
 ]
 const Deshbord = () => {
   const [selectedId, setSelectedId] = useState(null);

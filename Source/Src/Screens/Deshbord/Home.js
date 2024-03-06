@@ -12,13 +12,14 @@ const data = [
   {
     id: 1,
     image: require('../../../Assets/Images/location.png'),
-    Location: 'Dubai',
+    Location: 'Vanue',
     Date: 'Crowne Plaza\n Festival City Dubai',
     image2: 'https://agrinextcon.com/wp-content/uploads/2024/01/1-5.jpg',
     name: 'dr. Fel De Su',
     Designation: 'Founder',
     image3: require('../../../Assets/Images/google1.jpg'),
-    name1: 'Microsoft'
+    name1: 'Microsoft',
+    screen:'MapContainer'
   },
   {
     id: 2,
@@ -29,29 +30,30 @@ const data = [
     name: 'Ma Geelana',
     Designation: 'Co-Founder',
     image3: require('../../../Assets/Images/google1.jpg'),
-    name1: 'facebook'
+    name1: 'facebook',
+    screen:'MyCalendar'
   },
   {
     id: 3,
     image: require('../../../Assets/Images/information.png'),
-    Location: 'Dubai',
+    Location: 'About',
     Date: 'The AgriNext\n Conference',
     image2: 'https://agrinextcon.com/wp-content/uploads/2024/01/1-5.jpg',
     name: 'dr. Fel De Su',
     Designation: 'Founder',
     image3: require('../../../Assets/Images/google1.jpg'),
-    name1: 'navindia'
+    name1: 'navindia',
+    screen:'Aboutus'
   },
-  {
-    id: 4,
-    image2: 'https://agrinextcon.com/wp-content/uploads/2024/01/1-4.jpg',
-    name: 'Ma Geelani',
-    Designation: 'Founder',
-    image3: require('../../../Assets/Images/google1.jpg'),
-    name1: 'PhonePay'
-  },
+  
 
 ];
+const data1=[
+  {
+    id:1,
+    image: require('../../../Assets/Images/SeeAll.jpg'),
+  },
+]
 
 
 const Home = () => {
@@ -72,12 +74,13 @@ const Home = () => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <SliderBox1 />
 
-      <CustomCard data={data} heading={'AgriNextConference'} RenderId={1} />
+      <CustomCard data={data} heading={'Event Detail'} RenderId={1}  />
       <CustomCard data={speakerdata} heading={'Speakers'} RenderId={2} />
+      <CustomCard data={data1} heading={'Attendees'} RenderId={4} />
       <CustomCard data={speakerdata} heading={'Exhabitar'} RenderId={3} />
+      <CustomCard data={speakerdata} heading={'Media Partner'} RenderId={3} />
       <View style={{ marginBottom: 30 }}>
-
-        <CustomCard data={speakerdata} heading={'Media Partner'} RenderId={3} />
+        <CustomCard data={speakerdata} heading={'Companies Attending'} RenderId={3} />
       </View>
     </ScrollView>
   )

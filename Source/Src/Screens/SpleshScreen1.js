@@ -16,7 +16,7 @@ const SpleshScreen1 = () => {
   },[])
   return (
     <View style={styles.container}>
-      <Image source={require('../../Assets/Images/Logo.jpg')} style={styles.Image} />
+      <Image source={require('../../Assets/Images/NBMLogo.jpg')} style={styles.Image} />
     </View>
   )
 }

@@ -13,11 +13,15 @@ import DeshbordVenue from '../Screens/Deshbord/DeshbordVenue';
 import MainDeshbord from '../Screens/Deshbord/MainDeshbord';
 import DetailsInformation from '../Screens/Deshbord/DetailsInformation';
 import ApiData from '../ApiData';
+import UpcommingEvents from '../Screens/Deshbord/UpcommingEvents';
+import { Calendar } from 'react-native-calendars';
+import MyCalendar from '../Screens/Deshbord/Mycalender';
+import MapContainer from '../Screens/Deshbord/Map';
 const Stack = createNativeStackNavigator();
 const Navigatior = ({screens}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='SpleshScreen1'>
+      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='MainDeshbord'>
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />
@@ -28,10 +32,9 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="DeshbordVenue" component={DeshbordVenue} />
         <Stack.Screen name="MainDeshbord" component={MainDeshbord} />
         <Stack.Screen name="DetailsInformation" component={DetailsInformation} />
-        
-
-
-        
+        <Stack.Screen name="UpcommingEvents" component={UpcommingEvents} />
+        <Stack.Screen name="MyCalendar" component={MyCalendar} />
+        <Stack.Screen name="MapContainer" component={MapContainer} />
 
         {/* -------------------------Test Purpose---------------------- */}
         <Stack.Screen name="Test" component={Test} />
