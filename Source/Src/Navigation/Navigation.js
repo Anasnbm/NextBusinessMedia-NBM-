@@ -17,11 +17,13 @@ import UpcommingEvents from '../Screens/Deshbord/UpcommingEvents';
 import { Calendar } from 'react-native-calendars';
 import MyCalendar from '../Screens/Deshbord/Mycalender';
 import MapContainer from '../Screens/Deshbord/Map';
+import Message from '../Screens/Deshbord/Message';
+import Chat from '../Screens/Deshbord/Chat';
 const Stack = createNativeStackNavigator();
 const Navigatior = ({screens}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='MainDeshbord'>
+      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='SpleshScreen1'>
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />
@@ -35,6 +37,9 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="UpcommingEvents" component={UpcommingEvents} />
         <Stack.Screen name="MyCalendar" component={MyCalendar} />
         <Stack.Screen name="MapContainer" component={MapContainer} />
+        {/* --------------------chat Section --------------------------------- */}
+        <Stack.Screen name="Message" component={Message} />
+        <Stack.Screen name="Chat" component={Chat} />
 
         {/* -------------------------Test Purpose---------------------- */}
         <Stack.Screen name="Test" component={Test} />

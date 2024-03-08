@@ -167,7 +167,7 @@ function BottomTab() {
               <MaterialCommunityIcons name="comment-text" color={color} size={size} />
             ),
           }} /> */}
-           <Tab.Screen name="Conferences" component={Conferences} options={{
+           <Tab.Screen name="Message" component={Message} options={{
           tabBarLabel: 'Networking',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account-multiple-plus-outline" color={color} size={size} />

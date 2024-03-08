@@ -49,7 +49,7 @@ const Signup = () => {
 
 
             <ScrollView style={styles.box} showsVerticalScrollIndicator={false}>
-              <Image source={require('../../Assets/Images/Logo.jpg')} style={styles.Image} />
+              <Image source={require('../../Assets/Images/NBMLogo.jpg')} style={styles.Image} />
               <Text style={styles.Heading}>Signup</Text>
             
 

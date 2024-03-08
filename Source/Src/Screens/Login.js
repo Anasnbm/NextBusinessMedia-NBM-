@@ -37,7 +37,7 @@ const Login = () => {
         >
             {({ errors, touched, values, handleChange, setFieldTouched, handleSubmit, isValid }) => (
                 <SafeAreaView style={styles.container}>
-                    <Image source={require('../../Assets/Images/Logo.jpg')} resizeMode='contain' style={{ height: Height * 0.45, width: Width }} />
+                    <Image source={require('../../Assets/Images/NBMLogo.jpg')} resizeMode='contain' style={{ height: Height * 0.45, width: Width }} />
                     <View style={styles.box}>
                         <Text style={styles.Heading}>Login</Text>
 
