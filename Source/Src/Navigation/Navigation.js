@@ -19,11 +19,14 @@ import MyCalendar from '../Screens/Deshbord/Mycalender';
 import MapContainer from '../Screens/Deshbord/Map';
 import Message from '../Screens/Deshbord/Message';
 import Chat from '../Screens/Deshbord/Chat';
+import ForgetPassword from '../Screens/ForgetPassword/ForgetPassword';
+import EmailVarification from '../Screens/ForgetPassword/EmailVarification';
+import ResetPassword from '../Screens/ForgetPassword/ResetPassword';
 const Stack = createNativeStackNavigator();
 const Navigatior = ({screens}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='SpleshScreen1'>
+      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='Test'>
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />
@@ -41,10 +44,15 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="Message" component={Message} />
         <Stack.Screen name="Chat" component={Chat} />
 
+        {/*----------------------------------Foreget Password------------- */}
+        <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
+        <Stack.Screen name="EmailVarification" component={EmailVarification} />
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
+
+       
         {/* -------------------------Test Purpose---------------------- */}
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="ApiData" component={ApiData} />
-       
         
       </Stack.Navigator>
     </NavigationContainer>

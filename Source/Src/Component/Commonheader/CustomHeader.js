@@ -5,20 +5,20 @@ import { COLORS, Font } from '../../Theme/Colors';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-const CustomHeader = ({ title, left, right,back,OnPress }) => {
+const CustomHeader = ({ title, left, right,back,OnPress,textcolor }) => {
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
       {left && (
-          <TouchableOpacity style={styles.iconContainer} onPress={OnPress}>
-            <Image source={back ? require('../../../Assets/Images/left-arrow.png') : require('../../../Assets/Images/menu.png')} style={styles.icon} />
+          <TouchableOpacity style={[styles.iconContainer,]}  onPress={OnPress}>
+            <Image source={back ? require('../../../Assets/Images/left-arrow.png') : require('../../../Assets/Images/menu.png')} style={styles.icon} tintColor={textcolor ? COLORS.white:COLORS.black} />
           </TouchableOpacity>
         )}
       </View>
 
       <View style={styles.centerContainer}>
         {title &&
-          <Text style={styles.text}>{title}</Text>
+       <Text style={[styles.text, { color: textcolor ? COLORS.white : COLORS.black }]}>{title}</Text>
         }
       </View>
 

@@ -1,79 +1,9 @@
-import * as React from 'react';
-import { Button, View, Text, TouchableOpacity, Image } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { COLORS } from './Theme/Colors';
-import Message from './Screens/Deshbord/Message';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { WebView } from 'react-native-webview';
 
-function EmptyScreen() {
-  return <View />;
-}
-
-function Feed() {
-  const navigation = useNavigation();
-
+const Test = () => {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title={<Text>Go to Root</Text>} onPress={() => navigation.navigate('Root')} />
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
-
-function Test() {
-  return (
-    <Drawer.Navigator screenOptions={{ headerShown: false }}>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Profile" component={EmptyScreen} />
-      <Drawer.Screen name="Settings" component={EmptyScreen} />
-    </Drawer.Navigator>
-  );
-}
-
-function Home() {
-  return (
-    <Tab.Navigator
-      initialRouteName="Message"
-      screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
-      }}
-    >
-      <Tab.Screen
-        name="Message"
-        component={Message}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-          headerLeft: () => {
-            const navigation = useNavigation();
-            return (
-              <TouchableOpacity onPress={() => navigation.openDrawer()}>
-                <Image
-                  source={require('../Assets/Images/menu.png')}
-                  style={{ marginLeft: 10, width: 20, height: 20 }}
-                  tintColor={COLORS.black}
-                />
-              </TouchableOpacity>
-            );
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Feed"
-        component={Feed}
-        options={{
-          tabBarLabel: 'Root',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+    <WebView source={{ uri: 'https://calendar.google.com/calendar/u/0/r/eventedit?dates=20241010/20241012&text=TransportNext+Awards,+Conference+%26+Expo&details=Join+us+for+an+insightful+conference+where+industry+experts+will+share+their+knowledge+on+the+latest+trends+and+developments+in+the+field.+Network+with+professionals,+participate+in+engaging+discussions,+and+gain+valuable+insights+to+enhance+your+expertise.+Don%27t+miss+this+opportunity+to+connect+with+peers+and+expand+your+knowledge+base.+We+look+forward+to+seeing+you+there!' }} style={{ flex: 1 }} />
   );
 }
 

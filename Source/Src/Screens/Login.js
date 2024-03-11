@@ -74,9 +74,11 @@ const Login = () => {
                             borderColor={'blue'}
                             onPress={() => navigation.navigate('Deshbord')}
                         />
+                         <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: '#4287f5',alignSelf:'flex-end' }]} onPress={() => navigation.navigate('ForgetPassword')}>Forget Password</Text>
 
                         <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: 'black' }]}>You Don't Have Account?</Text>
                         <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: '#4287f5', marginBottom: 40 }]} onPress={() => navigation.navigate('Signup')}>Signup</Text>
+                       
                     </View>
                 </SafeAreaView>
             )}
