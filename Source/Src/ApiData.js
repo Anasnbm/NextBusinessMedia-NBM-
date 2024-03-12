@@ -1,34 +1,33 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import axios from 'axios'; // Import axios without curly braces
+import { StyleSheet, Text, View } from 'react-native'
+import React,{useState,useEffect} from 'react'
+import { fetchUsers } from './Api/FatchData';
 
 const ApiData = () => {
+  const [users, setUsers] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
+    const getUsers = async () => {
       try {
-        const response = await axios.get('https://dummyjson.com/products');
-        console.log(response); // Log the fetched data to the console
+        const fetchedUsers = await fetchUsers();
+        setUsers(fetchedUsers);
+        console.log(fetchedUsers.products)
       } catch (error) {
-        console.error('Error fetching data:', error);
+        // Handle error
       }
     };
 
-    fetchData(); //
-  }, []); //
+   
+
+    getUsers();
+  
+  }, []);
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text>ApiData</Text>
     </View>
-  );
-};
+  )
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+export default ApiData
 
-export default ApiData;
+const styles = StyleSheet.create({})

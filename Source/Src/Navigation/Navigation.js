@@ -53,6 +53,7 @@ const Navigatior = ({screens}) => {
         {/* -------------------------Test Purpose---------------------- */}
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="ApiData" component={ApiData} />
+
         
       </Stack.Navigator>
     </NavigationContainer>
