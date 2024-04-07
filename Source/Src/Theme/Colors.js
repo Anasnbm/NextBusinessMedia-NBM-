@@ -5,8 +5,10 @@ export const COLORS = {
     black: "#000000",
     blue:'#4287f5',
     red:'#FF0000',
-    green:'#74AE0F',
-    primery:'#74AE0F'
+    green:'#639900',
+    primery:'#FFF0C9',
+
+    faint:'#9e9e9e'
     
     };
 

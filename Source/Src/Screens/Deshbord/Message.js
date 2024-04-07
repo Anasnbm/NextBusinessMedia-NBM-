@@ -3,7 +3,7 @@ import React from 'react'
 import { COLORS } from '../../Theme/Colors';
 import { nativeViewGestureHandlerProps } from 'react-native-gesture-handler/lib/typescript/handlers/NativeViewGestureHandler';
 import { useNavigation } from '@react-navigation/native';
-
+import { Searchbar } from 'react-native-paper';
 const data = [
   {
     id: '1',
@@ -73,32 +73,43 @@ const data = [
 
 
 const Message = () => {
-  const navigation=useNavigation()
+  const navigation = useNavigation()
+  const [searchQuery, setSearchQuery] = React.useState('');
+
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={{backgroundColor:'#fff',width:'90%',}} 
-      onPress={()=>navigation.navigate('Chat',{ data: item })}>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
-  <Image source={item.userImg} style={{ height: 50, width: 50, borderRadius: 50 }} />
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1 ,left:10}}>
-    <Text style={styles.nametext}>{item.userName}</Text>
-    <Text style={{ color: COLORS.green }}>{item.messageTime}</Text>
-    
-  </View>
-</View>
-  <Text style={{left:60,bottom:25,width:'80%'}}>{item.messageText}</Text>
-</TouchableOpacity>
+      <TouchableOpacity style={{ backgroundColor: '#fff', width: '90%', }}
+        onPress={() => navigation.navigate('Chat', { data: item })}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', }}>
+          <Image source={item.userImg} style={{ height: 50, width: 50, borderRadius: 50 }} />
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', flex: 1, left: 10 }}>
+            <Text style={styles.nametext}>{item.userName}</Text>
+            <Text style={{ color: COLORS.green }}>{item.messageTime}</Text>
+
+          </View>
+        </View>
+        <Text style={{ left: 60, bottom: 25, width: '80%' }}>{item.messageText}</Text>
+      </TouchableOpacity>
 
     )
 
   }
   return (
     <View style={styles.conatainer}>
+      <Searchbar
+        placeholder="Search"
+        onChangeText={setSearchQuery}
+        value={searchQuery}
+        style={{ height: 50,alignSelf:'center' ,bottom:10,marginTop:10}}
+        inputStyle={{ fontSize: 16 }} 
+        inputContainerStyle={{ paddingVertical: 20}} 
+      />
+
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()} 
-        showsVerticalScrollIndicator={false}/>
+        keyExtractor={(item) => item.id.toString()}
+        showsVerticalScrollIndicator={false} />
     </View>
   )
 }
@@ -109,11 +120,11 @@ const styles = StyleSheet.create({
   conatainer: {
     flex: 1,
     backgroundColor: COLORS.white,
-    padding:15
+    padding: 15
   },
-  nametext:{
-    fontSize:16,
-    fontWeight:'500',
-    color:COLORS.black,
+  nametext: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: COLORS.black,
   }
 })

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView, KeyboardAvoidingView } from 'react-native';
+import { Image, StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView, KeyboardAvoidingView, StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -44,13 +44,14 @@ const Signup = () => {
       {({ errors, touched, values, handleChange, setFieldTouched, handleSubmit, isValid }) => (
        
        <KeyboardAvoidingView  style={{ flex: 1 }} behavior={'padding'}>
+        <StatusBar translucent={true}/>
        <SafeAreaView style={styles.container}>
           
-
+            <Image source={require('../../Assets/Images/NBMLogo.png')} style={styles.img}/>
 
             <ScrollView style={styles.box} showsVerticalScrollIndicator={false}>
-              <Image source={require('../../Assets/Images/NBMLogo.jpg')} style={styles.Image} />
-              <Text style={styles.Heading}>Signup</Text>
+              {/* <Image source={require('../../Assets/Images/NBMLogo.png')} style={styles.Image} /> */}
+              <Text style={[styles.Heading,{paddingVertical:10,marginTop:10}]}>Create an account</Text>
             
 
             
@@ -130,8 +131,8 @@ const Signup = () => {
               )}
               <CustomButton
                 title={'SignUp'}
-                bgColor={COLORS.blue} // <-- Use bgColor instead of Bgcolor
-                textColor={COLORS.white} // <-- Use textColor instead of color
+                bgColor={COLORS.blue} 
+                textColor={COLORS.white} 
                 borderColor={'blue'}
                 onPress={handleSubmit}
               />
@@ -150,18 +151,19 @@ const Signup = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.white
+    backgroundColor: COLORS.primery
   },
   box: {
     backgroundColor: "white",
-    width: '85%',
-    height:'90%',
+    width: '100%',
+     height:'70%',
     alignSelf: 'center',
-    padding: 20,
+    paddingHorizontal: 25,
     position: 'absolute',
-    top: 40,
+    // top: 40,
     flex:1,
-    borderRadius: 20,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius:30,
     shadowColor: "#000",
     flex: 1,
     shadowOffset: {
@@ -171,17 +173,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.57,
     shadowRadius: 15.19,
     elevation: 23,
-    // bottom:20
+    bottom:0
   },
   Heading: {
-    fontSize: 18,
+    fontSize: 30,
     color: 'black',
     fontWeight: '500',
     fontFamily: Font.regular
   },
   heading1: {
     fontSize: 18,
-    color: '#4287f5',
+    color: COLORS.blue,
     fontWeight: '500',
     fontFamily: Font.regular,
     alignSelf: 'flex-end',
@@ -190,12 +192,19 @@ const styles = StyleSheet.create({
   Image: {
     height: Height * 0.1,
     width: Width * 0.4,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    resizeMode:'contain'
   },
   validation: {
     fontSize: 12,
     color: COLORS.red,
     fontFamily: Font.regular,
+  },
+  img:{
+    height:250,
+    width:200,
+    resizeMode:'contain',
+    alignSelf:'center'
   }
 });
 

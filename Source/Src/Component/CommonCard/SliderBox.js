@@ -21,13 +21,13 @@ const SliderBox1 = () => {
    <SliderBox
         images={images}
           onCurrentImagePressed={handleImagePress}
-         sliderBoxHeight={150}
+         sliderBoxHeight={160}
         // // onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
         dotColor={COLORS.green}
         inactiveDotColor="#90A4AE"
-        paginationBoxVerticalPadding={20}
-        // autoplay
-        // circleLoop
+        // paginationBoxVerticalPadding={20}
+         autoplay
+         circleLoop
         resizeMethod={'resize'}
         resizeMode={'cover'}
         paginationBoxStyle={{
@@ -48,7 +48,7 @@ const SliderBox1 = () => {
         //   margin: 0,
         //   backgroundColor: "rgba(128, 128, 128, 0.92)"
         // }}
-         ImageComponentStyle={{borderRadius: 15, width: '95%', marginTop: 5,right:12}}
+         ImageComponentStyle={{borderRadius: 15, width: '95%', marginTop: 5,right:12,}}
          imageLoadingColor="#2196F3"
       />
     </>
@@ -67,4 +67,3 @@ const styles = StyleSheet.create({
 })
 
 export default SliderBox1
-

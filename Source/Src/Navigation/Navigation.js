@@ -12,7 +12,7 @@ import Deshbord from '../Screens/Deshbord/Deshbord';
 import DeshbordVenue from '../Screens/Deshbord/DeshbordVenue';
 import MainDeshbord from '../Screens/Deshbord/MainDeshbord';
 import DetailsInformation from '../Screens/Deshbord/DetailsInformation';
-import ApiData from '../ApiData';
+
 import UpcommingEvents from '../Screens/Deshbord/UpcommingEvents';
 import { Calendar } from 'react-native-calendars';
 import MyCalendar from '../Screens/Deshbord/Mycalender';
@@ -22,11 +22,12 @@ import Chat from '../Screens/Deshbord/Chat';
 import ForgetPassword from '../Screens/ForgetPassword/ForgetPassword';
 import EmailVarification from '../Screens/ForgetPassword/EmailVarification';
 import ResetPassword from '../Screens/ForgetPassword/ResetPassword';
+import AttendiesDetail from '../Screens/Deshbord/AttendiesDetail';
 const Stack = createNativeStackNavigator();
 const Navigatior = ({screens}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='Test'>
+      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='MainDeshbord'>
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />
@@ -40,6 +41,7 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="UpcommingEvents" component={UpcommingEvents} />
         <Stack.Screen name="MyCalendar" component={MyCalendar} />
         <Stack.Screen name="MapContainer" component={MapContainer} />
+        <Stack.Screen name="AttendiesDetail" component={AttendiesDetail} />
         {/* --------------------chat Section --------------------------------- */}
         <Stack.Screen name="Message" component={Message} />
         <Stack.Screen name="Chat" component={Chat} />
@@ -52,8 +54,7 @@ const Navigatior = ({screens}) => {
        
         {/* -------------------------Test Purpose---------------------- */}
         <Stack.Screen name="Test" component={Test} />
-        <Stack.Screen name="ApiData" component={ApiData} />
-
+   
         
       </Stack.Navigator>
     </NavigationContainer>

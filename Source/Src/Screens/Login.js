@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView } from 'react-native';
+import { Image, StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -37,7 +37,7 @@ const Login = () => {
         >
             {({ errors, touched, values, handleChange, setFieldTouched, handleSubmit, isValid }) => (
                 <SafeAreaView style={styles.container}>
-                    <Image source={require('../../Assets/Images/NBMLogo.jpg')} resizeMode='contain' style={{ height: Height * 0.45, width: Width }} />
+                    <Image source={require('../../Assets/Images/NBMLogo.png')} resizeMode='contain' style={{ height: Height * 0.6, width: Width }} />
                     <View style={styles.box}>
                         <Text style={styles.Heading}>Login</Text>
 
@@ -74,7 +74,10 @@ const Login = () => {
                             borderColor={'blue'}
                             onPress={() => navigation.navigate('Deshbord')}
                         />
-                         <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: '#4287f5',alignSelf:'flex-end' }]} onPress={() => navigation.navigate('ForgetPassword')}>Forget Password</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('ForgetPassword')}>
+                         <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: '#4287f5',alignSelf:'flex-end' }]} 
+                         >Forget Password</Text>
+                        </TouchableOpacity>
 
                         <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: 'black' }]}>You Don't Have Account?</Text>
                         <Text style={[styles.heading1, { fontSize: 18, alignSelf: 'center', color: '#4287f5', marginBottom: 40 }]} onPress={() => navigation.navigate('Signup')}>Signup</Text>
@@ -89,33 +92,10 @@ const Login = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLORS.white
+        backgroundColor: COLORS.primery
     },
-    box: {
-        backgroundColor: "white",
-        width: '85%',
-        height: Height * 0.87,
-        alignSelf: 'center',
-        padding: 20,
-        position: 'absolute',
-        top: '10%',
-        borderRadius: 20,
-        shadowColor: "#000",
-        flex: 1,
-        shadowOffset: {
-            width: 0,
-            height: 11,
-        },
-        shadowOpacity: 0.57,
-        shadowRadius: 15.19,
-        elevation: 23,
-    },
-    Heading: {
-        fontSize: 18,
-        color: 'black',
-        fontWeight: '500',
-        fontFamily: Font.regular
-    },
+  
+ 
     heading1: {
         fontSize: 18,
         color: '#4287f5',
@@ -125,7 +105,7 @@ const styles = StyleSheet.create({
         marginVertical: 6
     },
     Image: {
-        height: Height * 0.1,
+        height: Height * 0.15,
         width: Width * 0.4,
         alignSelf: 'center'
     },
@@ -134,19 +114,16 @@ const styles = StyleSheet.create({
         color: COLORS.red,
         fontFamily: Font.regular,
     },
-    container: {
-        flex: 1,
-        backgroundColor: "#fff"
-
-    },
+   
     box: {
         backgroundColor: "white",
-        width: '85%',
+        width: '100%',
         alignSelf: 'center',
         padding: 20,
         position: 'absolute',
-        top: '30%',
-        borderRadius: 20,
+        bottom: 0,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius:30,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -160,9 +137,9 @@ const styles = StyleSheet.create({
         // right: '15%',
     },
     Heading: {
-        fontSize: 18,
+        fontSize: 30,
         color: 'black',
-        fontWeight: '500',
+        fontWeight: '600',
         fontFamily: 'Poppins-Regular',
     },
     heading1: {

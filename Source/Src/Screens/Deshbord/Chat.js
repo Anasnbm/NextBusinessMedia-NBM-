@@ -47,7 +47,7 @@ const Chat = () => {
     return (
         <View style={styles.container}>
             {/* header */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',marginTop:10 }}>
                 <TouchableOpacity onPress={()=>navigation.goBack()}>
                     <Image source={require('../../../Assets/Images/left-arrow.png')} style={{ height: 25, width: 25, }} />
                 </TouchableOpacity>
@@ -58,8 +58,9 @@ const Chat = () => {
                 <TouchableOpacity>
                     <Image source={require('../../../Assets/Images/info.png')} style={{ height: 25, width: 25, resizeMode: 'contain' }} />
                 </TouchableOpacity>
+                
             </View>
-            {/*=================================== chat------------------ */}
+            {/*=================================== chat---------------------------------- */}
             <GiftedChat
                 messages={messages}
                 onSend={messages => onSend(messages)}

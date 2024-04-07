@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { COLORS } from '../Theme/Colors';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
-
+import * as Animatable from 'react-native-animatable';
 const SpleshScreen1 = () => {
   const navigation = useNavigation()
 
@@ -16,7 +16,7 @@ const SpleshScreen1 = () => {
   },[])
   return (
     <View style={styles.container}>
-      <Image source={require('../../Assets/Images/NBMLogo.jpg')} style={styles.Image} />
+      <Animatable.Image animation={'slideInUp'} source={require('../../Assets/Images/NBMLogo.png')} style={styles.Image} />
     </View>
   )
 }
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   Image: {
-    height: Height * 0.5, width: Width,
+    height: Height * 0.18, width: Width,
+    resizeMode:'contain'
   }
 })

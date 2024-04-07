@@ -25,7 +25,7 @@ const CustomHeader = ({ title, left, right,back,OnPress,textcolor }) => {
       <View style={styles.rightContainer}>
         {right &&
           <TouchableOpacity style={styles.iconContainer}>
-            <Image source={require('../../../Assets/Images/notification.png')} style={styles.icon} />
+            <Image source={require('../../../Assets/Images/notification.png')} style={styles.icon}  tintColor={textcolor ? COLORS.white:COLORS.black}/>
           </TouchableOpacity>
         }
       </View>

@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
    <>
-   <StatusBar barStyle={'dark-content'} backgroundColor='transparent'></StatusBar>
+   <StatusBar barStyle={'dark-content'}   translucent={true}/>
    <Navigatior/>
    </>
   );

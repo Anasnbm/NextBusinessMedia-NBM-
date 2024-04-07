@@ -1,13 +1,16 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TurboModuleRegistry, View,Image, TextInput, StatusBar } from 'react-native'
 import React from 'react'
 import { COLORS } from '../../Theme/Colors'
-
+import { fetchUsers } from '../../Api/FatchData'
 import SliderBox1 from '../../Component/CommonCard/SliderBox'
 import CustomCard from '../../Component/CommonCard/CustomCard'
 import axios from 'axios'
 import { useEffect } from 'react'
-import ApiData from '../../ApiData'
+
 import { useState } from 'react'
+import CustomHeader from '../../Component/Commonheader/CustomHeader'
+import { useNavigation } from '@react-navigation/native'
+
 const data = [
   {
     id: 1,
@@ -58,26 +61,36 @@ const data1=[
 
 const Home = () => {
   const [speakerdata,setSpeakerData]=useState('')
-  const FetchApiData = async () => {
-    try {
-      const response = await axios.get('https://dummyjson.com/products');
-      // console.log(response.data.products);
-      setSpeakerData(response.data.products);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const navigation=useNavigation()
   useEffect(() => {
-    FetchApiData();
+    const fetchData = async () => {
+      try {
+        const fetchedUsers = await fetchUsers();
+        setSpeakerData(fetchedUsers);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchData();
   }, []);
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <SliderBox1 />
+ 
+        <SliderBox1 />
+     
+          {/* <View style={styles.search}>
+            <Image source={require('../../../Assets/Images/search.png')} style={styles.SerchIcon}/>
+           <TextInput placeholder='Search Here' style={{width:'80%',left:10}}/>
+        </View>
+      */}
+
 
       <CustomCard data={data} heading={'Event Detail'} RenderId={1}  />
       <CustomCard data={speakerdata} heading={'Speakers'} RenderId={2} />
       <CustomCard data={data1} heading={'Attendees'} RenderId={4} />
-      <CustomCard data={speakerdata} heading={'Exhabitar'} RenderId={3} />
+      <CustomCard data={speakerdata} heading={'Exhabitar'} RenderId={5} />
       <CustomCard data={speakerdata} heading={'Media Partner'} RenderId={3} />
       <View style={{ marginBottom: 30 }}>
         <CustomCard data={speakerdata} heading={'Companies Attending'} RenderId={3} />
@@ -92,7 +105,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 13,
+     paddingHorizontal: 13,
 
+  },
+ 
+  search:{
+    height:45,
+    width:'80%',
+    backgroundColor:'#edf7f0',
+    flexDirection:'row',
+    alignItems:'center',
+    paddingLeft:10,
+    alignSelf:'center',
+    bottom:-20,
+    borderRadius:8,
+    borderWidth:.5,
+    // borderColor:'#F3FBF4'
+    position:'absolute'
+  },
+  SerchIcon:{
+      height:25,
+      width:25
   }
 })
