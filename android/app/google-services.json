@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1065319381074",
+    "project_id": "nextbusinessmedia-6a3d4",
+    "storage_bucket": "nextbusinessmedia-6a3d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065319381074:android:b7960dd8f0be14e365478b",
+        "android_client_info": {
+          "package_name": "com.nextbusinessmedia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBJ7qltiXlFU2kA4ACPjAa_JizxbHWzFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

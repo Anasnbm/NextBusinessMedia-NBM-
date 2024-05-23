@@ -1,33 +1,40 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { COLORS, CommonStyles } from '../../Theme/Colors'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
+import { COLORS, CommonStyles, Font } from '../../Theme/Colors'
+import ImagePicker from 'react-native-image-crop-picker';
+import CustomTextinput from '../../Component/CommonTextInput/CustomTextinput';
+import EventPayment from '../Events/EventPayment';
+import EventList from '../Events/EventList';
 
 const UserProfile = () => {
+  const [pickedImage, setPickedImage] = useState(null);
+
+  const imagePicker = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      setPickedImage(image);
+    });
+  }
+
   return (
-    <View style={{flex:1,backgroundColor:COLORS.white}}>
-
-    
-    <View style={styles.container}>
-     
-      <View style={{height:'50%',backgroundColor:COLORS.green,width:'100%',padding:20,alignItems:'center',borderRadius:15}}>
-
-      <Image source={require('../../../Assets/Images/userimage.jpg')} style={{ height: 120, width: 120, borderRadius:100 }} />
-      <Text style={[CommonStyles.boldText,{fontSize:20,marginTop:10}]}>Vender Dusan</Text>
-      <Text style={CommonStyles.boldText}>Product Manager At Google silicon Vally</Text>
+    <View style={{ flex: 1, backgroundColor: COLORS.white,padding:15 }}>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.Picker} onPress={imagePicker}>
+          {pickedImage ? (
+            <Image source={{ uri: pickedImage.path }} style={styles.pickedImage} />
+          ) : (
+            <Image source={require('../../../Assets/Images/userimage.jpg')} 
+      style={styles.pickedImage}/>
+      )}
+        </TouchableOpacity>
+        <Text style={styles.Heading}>Rahil Khan</Text>
+        <Text style={styles.texT}>Founder Technoxian</Text>
       </View>
-      <View style={{alignItems:'center',justifyContent:'space-between',flexDirection:'row',gap:20,marginTop:10}}>
-     <Image source={require('../../../Assets/Images/mail.png')} style={{height:30,width:30,resizeMode:'contain'}}/>
-      <Text style={CommonStyles.boldText}>abc@gmail.com</Text>
-      </View>
-      <View style={{alignItems:'center',justifyContent:'space-between',flexDirection:'row',gap:20,marginTop:10}}>
-     <Image source={require('../../../Assets/Images/location.png')} style={{height:30,width:30,resizeMode:'contain'}}/>
-      <Text style={CommonStyles.boldText}>Indai   (110026) </Text>
-      </View>
-      <View style={{alignItems:'center',justifyContent:'space-between',flexDirection:'row',gap:20,marginTop:10}}>
-     <Image source={require('../../../Assets/Images/whatsapp.png')} style={{height:30,width:30,resizeMode:'contain'}}/>
-      <Text style={CommonStyles.boldText}>+91 9012128014</Text>
-      </View>
-    </View>
+        <View style={{height:100,width:'100%',borderWidth:1,marginTop:20,borderRadius:10}}></View>
+        <Text style={[styles.Heading,{marginTop:10}]}>Activities</Text>
     </View>
   )
 }
@@ -35,21 +42,40 @@ const UserProfile = () => {
 export default UserProfile
 
 const styles = StyleSheet.create({
-  container:{
-    alignItems:"center",
-    backgroundColor:COLORS.white,
-    // padding:15,
-    alignItems:'center',
-    borderRadius:12,
-    margin:10,
-    shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 5,
-},
-shadowOpacity: 0.36,
-shadowRadius: 6.68,
-
-elevation: 11,
+  container: {
+    height: '20%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop:10
+  },
+  Picker: {
+    // marginTop:10,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    borderWidth: 0.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pickedImage: {
+    height: '100%',
+    width: '100%',
+    borderRadius: 50,
+  },
+  pickerText: {
+    color: COLORS.gray,
+    fontSize: 16,
+  },
+  Heading:{
+    fontSize:16,
+    color:COLORS.black,
+    fontWeight:'800',
+    fontFamily:Font.bold,
+  },
+  texT:{
+    fontSize:14,
+    fontWeight:'500',
+    color:COLORS.black,
+    fontFamily:Font.regular
   }
-})
+});

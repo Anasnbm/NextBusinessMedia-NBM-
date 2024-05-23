@@ -9,7 +9,7 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import CustomButton from '../../Component/CommunButton/CustomButton'; // Make sure this path is correct
-import { COLORS } from '../../Theme/Colors';
+import { COLORS, Font } from '../../Theme/Colors';
 import { useNavigation } from '@react-navigation/native';
 
 const CELL_COUNT = 4;
@@ -30,7 +30,7 @@ export default function EmailVarification() {
       OnPress={() => navigation.goBack()}
       title={'Varification'}/>
       <Image source={require('../../../Assets/Images/Lock1.png')}
-                        style={{ alignSelf: 'center', marginTop: 30,height:100,width:100 }} />
+                        style={{ alignSelf: 'center', marginTop: 30,height:100,width:100,tintColor:COLORS.blue }} />
       {/* Main Content */}
       <View style={styles.content}>
         {/* <Text style={styles.title}>Verification</Text> */}
@@ -82,11 +82,12 @@ const styles = StyleSheet.create({
     marginBottom: 10, // Add margin for better spacing
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
     marginBottom: 20, 
     color:COLORS.black,
-    marginTop:50
+    marginTop:50,
+    fontFamily:Font.regular
   },
   root: {
     flex: 1,

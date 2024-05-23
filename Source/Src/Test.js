@@ -1,32 +1,69 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
-import Svg, { Polygon } from 'react-native-svg';
+import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { speakerData } from './Api/FinextData'
+import { COLORS } from '../Src/Theme/Colors'
 
 const Test = () => {
-  return (
-    <TouchableOpacity style={{ aspectRatio: 1.8, width: '100%' }}>
-      <Svg height="100%" width="20%">
-        <Polygon
-          points="0,0 100,10 100,60 0,70"
-          fill="#66B2ff"
-        />
-      </Svg>
-      <View style={styles.centeredText}>
-        <Text>See All</Text>
+  const renderItem = ({item}) => {
+    return (
+      <View style={styles.UpperContainer}>
+        <View style={styles.box}>
+          <Image  source={{uri:item.image2}} style={styles.Image2Style}/>
+          <View style={{alignItems:'center'}}>
+            <Text>{item.name}</Text>
+            <Text>{item.designation}</Text>
+          </View>
       </View>
-    </TouchableOpacity>
-  );
-};
+      </View>
+    )
+  }
 
-export default Test;
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={speakerData}
+        renderItem={renderItem}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      />
+      <Text>Helo</Text>
+    </View>
+  )
+}
+
+export default Test
 
 const styles = StyleSheet.create({
-  centeredText: {
-    position: 'absolute',
-    top:0,
-  
-    // top: '50%',
-    // left: '50%',
-    // transform: [{ translateX: -50 }, { translateY: -50 }],
+  container: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+   
   },
-});
+  box: {
+    height: 140,
+    width: 140,
+    backgroundColor: COLORS.white,
+    borderRadius: 8,
+    shadowColor: COLORS.red,
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 5,
+  },
+  UpperContainer:{
+    height:160,
+    width:155,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  Image2Style:{
+    height:100,
+      width:'100%',
+      resizeMode:'stretch',
+      borderTopLeftRadius:10,
+      borderTopRightRadius:10
+  }
+})

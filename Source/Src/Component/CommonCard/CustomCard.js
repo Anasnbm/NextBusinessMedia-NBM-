@@ -2,27 +2,47 @@ import { Dimensions, FlatList, Image, StyleSheet, Text, TouchableOpacity, View }
 import React, { useEffect, useState } from 'react';
 import { COLORS, Font } from '../../Theme/Colors';
 import { useNavigation } from '@react-navigation/native';
-
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
 import { Banner } from 'react-native-paper';
 import { makeMutable } from 'react-native-reanimated';
 
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-
-const CustomCard = ({ data, heading, RenderId, }) => {
-
+const CustomCard = ({ data, heading, RenderId, shadowColors}) => {
+  // console.log('colors',shadowColors)
+  // console.log('first',RenderId)
   const [selectTabe, setselectTabe] = useState(0)
   const [showAll, setShowAll] = useState(false);
-  const visibleData = showAll ? data : data.slice(0, 9);
+  const [isLoading, setIsLoading] = useState(false);
+  const [visibleData, setVisibleData] = useState([]);
 
   const navigation = useNavigation()
+
+  useEffect(() => {
+    if (data) {
+      setVisibleData(showAll ? data : data.slice(0, 9));
+    } else {
+      setVisibleData([]);
+    }
+  }, [data, showAll]);
+
   const renderItem = ({ item, index }) => {
     if (RenderId === 1) {
       return (
         <View style={[styles.cardContainer,]}>
           <TouchableOpacity
-            style={[styles.Card1, { backgroundColor: selectTabe === index ? COLORS.green : COLORS.white, borderWidth: selectTabe === index ? 0.4 : 1 }]}
+            style={[styles.Card1, { backgroundColor: selectTabe === index ? COLORS.green : COLORS.white, borderWidth: selectTabe === index ? 0.4 : 0.4 }]}
             onPress={() => {
               setselectTabe(index);
               navigation.navigate(item.screen);
@@ -37,126 +57,101 @@ const CustomCard = ({ data, heading, RenderId, }) => {
       );
     } else if (RenderId === 2) {
       return (
-        <View style={styles.cardContainer}>
-          <View style={styles.Card2}
-            >
-            <Image source={{ uri: item.thumbnail }} style={styles.image1} />
-            {/* <Text style={styles.title}>{item.title}</Text> */}
-            {/* <Text style={styles.description}>{item.category}</Text> */}
-            <TouchableOpacity style={styles.card1Name}
-            onPress={() => navigation.navigate('DetailsInformation', {
-              data: item
-            })}>
-          
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-          onPress={() => navigation.navigate('DetailsInformation', {
-            data: item
-          })}>
-          <Text style={styles.clickHere}>Click Here</Text>
-          </TouchableOpacity>
-        </View>
-      );
-    }
-    else if (RenderId === 3) {
-      return (
-        <View style={[styles.cardContainer, { width:120,height:100,backgroundColor:'pink',borderRadius: 15,}]}>
-          <TouchableOpacity style={{ alignItems: "center", borderRadius:15}}
-            onPress={() => navigation.navigate('DetailsInformation', {
-              data: item
-            })}>
-            <Image source={{ uri: item.thumbnail }} style={styles.image3} />
-            {/* <Text style={styles.title}>{item.title}</Text> */}
-            {/* <Text style={styles.description}>{item.Designation}</Text> */}
-          </TouchableOpacity>
-        </View>
-      );
-    }
-    else if (RenderId === 4) {
-      return (
         <View style={styles.Container4}>
           <TouchableOpacity
             style={{}}
             onPress={() => navigation.navigate('DetailsInformation', { data: item })}
           >
-
             <Image
-              source={item.image}
-              style={[styles.image1, { height: 60, width: Width * 0.5, resizeMode: 'contain', borderRadius: 0 }]}
+              source={{uri:item.image2}}
+              style={[ {  borderRadius: 10,width:120,height:100 }]}
             />
-
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('AttendiesDetail', { data: item })}>
-            <Text style={[styles.seeAll, { marginTop: 10, color: COLORS.white }]}>See All</Text>
-          </TouchableOpacity>
+          <View style={{alignItems:'center'}}>
+            <Text style={styles.TexT}>{item.name}</Text>
+            <Text style={styles.TexT}>{item.name1}</Text>
+          </View>
         </View>
-
-
-
       );
+    } else if (RenderId === 3) {
+      if (isLoading) {
+        return (
+          <View style={styles.loadingContainer}>
+            <DotIndicator color={COLORS.white} size={20} />
+          </View>
+        );
+      }
 
-    }
-    else if (RenderId === 5) {
       return (
         <View style={styles.cardContainer5}>
-       
-        
-          <TouchableOpacity style={{ height: 60,borderWidth: 1, borderRadius:10 }} onPress={() => navigation.navigate('DetailsInformation', { data: item })}>
+          <TouchableOpacity
+            style={{ height: 60, borderWidth: 0.5, borderRadius: 10, width: 65 }}
+            onPress={() => navigation.navigate('DetailsInformation', { data: item })}
+          >
             <Image source={{ uri: item.thumbnail }} style={styles.image5} />
-          </TouchableOpacity> 
-      
-        <Text style={styles.TexT}>{`$${item.price}`}</Text>
+          </TouchableOpacity>
+          <Text style={styles.TexT}>{`$${item.price}`}</Text>
         </View>
       );
-    }
-    else {
+    } else {
       return null;
     }
   };
 
   return (
     <>
-      {/* <Text style={[styles.location,{color:COLORS.black,fontSize:16}]}>{heading}</Text> */}
-      {RenderId === 5 ?
-       <View style={styles.container}>
-         <Text style={[styles.location, { color: COLORS.black, fontSize: 16 }]}>{heading}</Text>
-       <FlatList
-         data={visibleData}
-         renderItem={renderItem}
-         horizontal={false}
-         numColumns={5} // Assuming you want 3 columns
-         keyExtractor={(item) => item.id.toString()}
-       />
-       {data.length > 9 && (
-        <>
-         <TouchableOpacity onPress={() => setShowAll(!showAll)}
-         style={showAll ? styles.renderid51:styles.renderid5}>
-           {/* <Text>{showAll ? "See Less" : "See More"}</Text> */}
-           <Image source={require('../../../Assets/Images/Greater.png')} style={{height:30,width:30}} tintColor={COLORS.white}/>
-         </TouchableOpacity>
-           <Text style={showAll ? styles.seelessText:styles.semoreText}>{showAll ? "See Less" : "See More"}</Text>
-         </>
-       )}
-     </View>
-      :
-      <View style={[RenderId === 1 || RenderId === 2 || RenderId === 4  ? styles.container : styles.container2,{marginTop:RenderId === 1 ?0 :20}]}
-      >
-        <Text style={[styles.location, { color: COLORS.black, fontSize: 16 }]}>{heading}</Text>
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item) => item.id.toString()}
-        />
-        {(RenderId === 2 || RenderId === 3) && <Text style={styles.seeAll} onPress={() => navigation.navigate('AttendiesDetail')}>See All</Text>}
-      </View>
-}
+      {RenderId === 3 ? (
+        <View style={[styles.container,{shadowColor: shadowColors,}]}>
+          <Text style={[styles.location, { color: COLORS.black, fontSize: 16 }]}>{heading}</Text>
+          {visibleData.length > 0 ? (
+            <FlatList
+              data={visibleData}
+              renderItem={renderItem}
+              horizontal={false}
+              numColumns={5}
+              keyExtractor={(item) => item.id.toString()}
+            />
+          ) : (
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyText}>No data available</Text>
+            </View>
+          )}
+          {data && data.length > 9 && (
+            <>
+              <TouchableOpacity onPress={() => setShowAll(!showAll)}
+              style={showAll ? styles.renderid51 : styles.renderid5}>
+                <Image source={require('../../../Assets/Images/Greater.png')} style={{height:30,width:30}} tintColor={COLORS.white}/>
+              </TouchableOpacity>
+              <Text style={showAll ? styles.seelessText : styles.semoreText}>{showAll ? "See Less" : "See More"}</Text>
+            </>
+          )}
+        </View>
+      ) : (
+        <View style={[RenderId === 1 || RenderId === 2 || RenderId === 4 ? styles.container : styles.container2, {marginTop:RenderId === 1 ? 0 : 20,shadowColor: shadowColors,}]}>
+          <Text style={[styles.location, { color: COLORS.black, fontSize: 16 }]}>{heading}</Text>
+          {data ? (
+            <FlatList
+              data={data}
+              renderItem={renderItem}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              keyExtractor={(item) => item.id.toString()}
+            />
+          ) : (
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyText}>No data available</Text>
+            </View>
+          )}
+          {RenderId === 2 && <Text style={styles.seeAll} onPress={() => navigation.navigate('AttendiesDetail')}>See More</Text>}
+        </View>
+      )}
     </>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -175,14 +170,8 @@ const styles = StyleSheet.create({
     elevation: 9,
     marginTop: 20
   },
-  container2: {
 
-    padding: 10,
-    backgroundColor: COLORS.white,
-    // borderRadius: 15,
-    // borderWidth:0.5,
-    marginTop: 20
-  },
+
   cardContainer: {
 
     width: 140,
@@ -191,8 +180,18 @@ const styles = StyleSheet.create({
 
 
   },
+  cardContainer4: {
+ height:140,
+    width: 140,
+    marginRight: 10,
+    marginTop: 10,
+    borderWidth:0.5,
+    borderRadius:15,
+  backgroundColor:COLORS.green
+
+  },
   cardContainer5: {
-    // borderRadius: 10,
+    
     width: '17%',
     marginRight: 10,
     marginTop: 10,
@@ -260,15 +259,8 @@ const styles = StyleSheet.create({
 
     elevation: 5,
   }, card1Name: {
-    position: 'absolute',
-    bottom: 0,
-    height: 30,
-    backgroundColor: COLORS.green,
-    width: '100%',
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    opacity: 0.5,
-    overlayColor: "red"
+    
+   
 
   },
   image2: {
@@ -302,16 +294,18 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     textAlign: 'center',
     fontWeight: '800',
-    position: 'absolute',
-    bottom: 8,
+   
     alignSelf: 'center',
-
+    fontFamily: Font.regular,
+    fontSize:14
 
   },
   seeAll: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
-    alignSelf: 'flex-end',
+    position:'absolute',
+    right:0,
+    top:10,
     color: COLORS.green
 
   },
@@ -325,15 +319,19 @@ const styles = StyleSheet.create({
   },
   Container4: {
     justifyContent: 'space-between',
-    flexDirection: 'row',
+    // flexDirection: 'row',
     alignItgems: 'center',
-    gap: 100,
+    // gap: 100,
     // height:40,
     // width:'100%',
-    backgroundColor: COLORS.green,
-    padding: 10,
+    // backgroundColor:'#d9fac8',
+    borderWidth:0.5,
+    padding: 5,
     borderRadius: 10,
-    marginTop: 10
+    marginTop: 10,
+    marginRight:10,
+    width:132,
+    height:145
   },
   renderid5:{
     height:60,
@@ -358,8 +356,10 @@ const styles = StyleSheet.create({
   },
   TexT:{
     alignSelf:'center',
-    color:COLORS.green,
-    fontSize:16
+    color:COLORS.black,
+    fontSize:14,
+    fontFamily: Font.regular,
+    textAlign:'center'
   },
   semoreText:{
      position:'absolute',
@@ -372,7 +372,15 @@ const styles = StyleSheet.create({
     color:COLORS.green,
     // bottom:-20,
     // position:'absolute',
-  }
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.green,
+    borderRadius: 10,
+    padding: 10,
+  },
 
 });
 

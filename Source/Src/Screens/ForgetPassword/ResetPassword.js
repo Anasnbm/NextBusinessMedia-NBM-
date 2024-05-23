@@ -44,18 +44,20 @@ const ResetPassword = () => {
                             OnPress={() => navigation.goBack()}
                         />
                         <Image source={require('../../../Assets/Images/Lock.png')}
-                            style={{ alignSelf: 'center', marginTop: 30 }} />
+                            style={{ alignSelf: 'center', marginTop: 30,tintColor:COLORS.blue }} />
 
                         {/* <Text style={styles.title}>Forget Password</Text> */}
-                        <Text style={{ fontSize: 18, textAlign: 'center', marginVertical: 30, color: COLORS.black }}>Please Enter Registred Email Address</Text>
+                        <Text style={{ fontSize: 16, textAlign: 'center', marginVertical: 30, color: COLORS.black,fontFamily:Font.regular }}>Please Enter Registred Email Address</Text>
                         <CustomTextinput
-                            PlaceHolder={'Create New Password'}
+                            PlaceHolder={'Password'}
+                            secure={true}
                             value={values.password}
                             onChangeText={handleChange('password')}
                             onBlur={() => setFieldTouched('password')}
                             error={errors.password}
+                            LockIcon={true}
+                            icons={require('../../../Assets/Icons/lock.png')}
                             touched={touched.password}
-                            secure={true}
                         />
                         {touched.password && errors.password && (
                             <Text style={styles.validation}>{errors.password}</Text>
@@ -67,7 +69,9 @@ const ResetPassword = () => {
                             onBlur={() => setFieldTouched('password')}
                             error={errors.password}
                             touched={touched.password}
+                            icons={require('../../../Assets/Icons/lock.png')}
                             secure={true}
+                            LockIcon={true}
                         />
                         {touched.password && errors.password && (
                             <Text style={styles.validation}>{errors.password}</Text>
@@ -76,30 +80,30 @@ const ResetPassword = () => {
                         <View style={{ marginTop: 30 }}>
 
                             <CustomButton title={'Submit'} bgColor={COLORS.blue}
-                             onPress={() => setshowModal(true) }/>
+                                onPress={() => setshowModal(true)} />
                         </View>
 
                     </View>
-                    
-                        <Modal isVisible={showModal} style={{ margin: 0 }}
+
+                    <Modal isVisible={showModal} style={{ margin: 0 }}
                         backdropOpacity={0.5}
-                         onBackdropPress={() => {
+                        onBackdropPress={() => {
                             setshowModal(false)
                         }} onBackButtonPress={() => {
                             setshowModal(false)
                         }}>
-                            <View style={styles.modalContainer}>
-                                <Image source={require('../../../Assets/Images/Success.png')}
-                                style={styles.modalImge}/>
-                                <Text style={styles.modalText}>Password Changed</Text>
-                                <Text style={styles.modalText}>Password changed successfully, you can login again with a new password</Text>
-                               <View style={{width:'100%'}}>
-                               <CustomButton bgColor={COLORS.blue} title={'Go To Login'}
-                               onPress={()=>navigation.navigate('Login')}/>
-                               </View>
+                        <View style={styles.modalContainer}>
+                            <Image source={require('../../../Assets/Images/Success.png')}
+                                style={styles.modalImge} />
+                            <Text style={styles.modalText}>Password Changed</Text>
+                            <Text style={styles.modalText}>Password changed successfully, you can login again with a new password</Text>
+                            <View style={{ width: '100%' }}>
+                                <CustomButton bgColor={COLORS.blue} title={'Go To Login'}
+                                    onPress={() => navigation.navigate('Login')} />
                             </View>
-                        </Modal>
-                    
+                        </View>
+                    </Modal>
+
                 </>
 
 
@@ -117,7 +121,7 @@ const styles = StyleSheet.create({
         // marginTop:30,
         backgroundColor: COLORS.white
     },
-    modalContainer:{
+    modalContainer: {
         width: '100%',
         height: '55%',
         backgroundColor: 'white',
@@ -126,21 +130,21 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         padding: 15,
-        alignItems:'center',
-       
-    },
-    modalImge:{
-        height:250,
-        width:250,
-        resizeMode:'contain',
-        alignSelf:'center'
-    },
-    modalText:{
-        fontSize:16,
-        color:COLORS.black,
-        textAlign:'center',
-        fontWeight:"500",
+        alignItems: 'center',
 
+    },
+    modalImge: {
+        height: 250,
+        width: 250,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
+    modalText: {
+        fontSize: 14,
+        color: COLORS.black,
+        textAlign: 'center',
+        fontWeight: "500",
+        fontFamily: Font.regular
     }
 })
 

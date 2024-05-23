@@ -3,20 +3,24 @@ import { Platform,StyleSheet } from 'react-native';
 export const COLORS = {
     white: "#fff",
     black: "#000000",
-    blue:'#4287f5',
+    blue:'#265FB1',
     red:'#FF0000',
     green:'#639900',
     primery:'#FFF0C9',
 
-    faint:'#9e9e9e'
-    
+    faint:'#9e9e9e',
+    primeryBlue:'#265FB1',
+    secondry:'#58606A',
+    placeHolderTextColor:'#D4D4D4',
+    finext:'#D96f41',
+    transport:'#EB2326'
     };
 
 export const Font = {
-    bold: 'SpaceGrotesk-Bold',
+    bold: 'Sagata Normal Sans-Bold',
     medium: 'SpaceGrotesk-Light',
     light: 'SpaceGrotesk-Medium',
-    regular: 'SpaceGrotesk-Regular',
+    regular: 'Sagata Normal Sans-Regular',
     semibold: 'SpaceGrotesk-SemiBold',
 };
 
@@ -28,7 +32,7 @@ export const Font = {
     },
     boldText: {
         fontFamily: Font.bold,
-        fontSize: 18,
+        fontSize: 16,
         color: COLORS.black,
       
     },

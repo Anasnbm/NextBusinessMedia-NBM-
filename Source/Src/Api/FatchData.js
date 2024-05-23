@@ -22,4 +22,13 @@ export const searchData = async (searchQuery) => {
       throw error;
     }
   };
+  export const GitHubfetch = async () => {
+    try {
+      const response = await axios.get(`https://api.github.com/users`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
   

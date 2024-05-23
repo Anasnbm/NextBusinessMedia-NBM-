@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Test from '../Test';
 import SpleshScreen1 from '../Screens/SpleshScreen1';
 import CustomButton from '../Component/CommunButton/CustomButton';
-import Test1 from '../Test1';
 import Signup from '../Screens/Signup';
 import Login from '../Screens/Login';
 import Deshbord from '../Screens/Deshbord/Deshbord';
@@ -23,11 +22,21 @@ import ForgetPassword from '../Screens/ForgetPassword/ForgetPassword';
 import EmailVarification from '../Screens/ForgetPassword/EmailVarification';
 import ResetPassword from '../Screens/ForgetPassword/ResetPassword';
 import AttendiesDetail from '../Screens/Deshbord/AttendiesDetail';
+
+import EventList from '../Screens/Events/EventList';
+import EventMap from '../Screens/Events/EventMap';
+import EventPayment from '../Screens/Events/EventPayment';
+import CoformationPayment from '../Screens/Events/CoformationPayment';
+import SuccessFulPayment from '../Screens/Events/SuccessFulPayment';
+import QrCodeScanner from '../Screens/Events/QrCodeScanner';
+import TermAndConditon from '../Screens/Term&Condition/TermAndConditon';
+import NotificationScreen from '../Screens/Deshbord/SwipeableList';
+import CommonCustomCard from '../Component/CommonCard/CommonCustomCard';
 const Stack = createNativeStackNavigator();
 const Navigatior = ({screens}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='MainDeshbord'>
+      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='SpleshScreen1'>
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />
@@ -42,6 +51,13 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="MyCalendar" component={MyCalendar} />
         <Stack.Screen name="MapContainer" component={MapContainer} />
         <Stack.Screen name="AttendiesDetail" component={AttendiesDetail} />
+        <Stack.Screen name="NotificationScreen" component={NotificationScreen} />
+        {/*------------------------------- event--------------------------------------*/}
+        <Stack.Screen name="EventList" component={EventList} />
+        <Stack.Screen name="EventMap" component={EventMap} />
+        <Stack.Screen name="EventPayment" component={EventPayment} />
+        <Stack.Screen name="CoformationPayment" component={CoformationPayment} />
+        <Stack.Screen name="SuccessFulPayment" component={SuccessFulPayment} />
         {/* --------------------chat Section --------------------------------- */}
         <Stack.Screen name="Message" component={Message} />
         <Stack.Screen name="Chat" component={Chat} />
@@ -50,10 +66,16 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
         <Stack.Screen name="EmailVarification" component={EmailVarification} />
         <Stack.Screen name="ResetPassword" component={ResetPassword} />
+{/* =====================================+===================================== */}
+
 
        
         {/* -------------------------Test Purpose---------------------- */}
         <Stack.Screen name="Test" component={Test} />
+        <Stack.Screen name="CommonCustomCard" component={CommonCustomCard} />
+        <Stack.Screen name="QrCodeScanner" component={QrCodeScanner} />
+        {/* terms -------------------------- */}
+        <Stack.Screen name="TermAndConditon" component={TermAndConditon} />
    
         
       </Stack.Navigator>

@@ -1,0 +1,27 @@
+ else if (RenderId === 4) {
+      return (
+        <View style={styles.Container4}>
+          <TouchableOpacity
+            style={{}}
+            onPress={() => navigation.navigate('DetailsInformation', { data: item })}
+          >
+
+            <Image
+              source={{uri:item.image2}}
+              style={[ {  borderRadius: 0,width:120,height:100 }]}
+            />
+
+          </TouchableOpacity>
+            <Text style={styles.TexT}>{item.Designation}</Text>
+          <View style={{flexDirection:'row'}}>
+            <Image source={require('../../../Assets/Images/location.png')}
+            style={{height:20,width:20}}/>
+            <Text style={styles.TexT}>{item.Location}</Text>
+          </View>
+        </View>
+
+
+
+      );
+
+    }

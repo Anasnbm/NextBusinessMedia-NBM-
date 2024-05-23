@@ -42,13 +42,13 @@ const ForgetPassword = () => {
                         OnPress={() => navigation.goBack()}
                     />
                     <Image source={require('../../../Assets/Images/Lock.png')}
-                        style={{ alignSelf: 'center', marginTop: 30 }} />
+                        style={{ alignSelf: 'center', marginTop: 30 ,tintColor:COLORS.blue}} />
 
                     {/* <Text style={styles.title}>Forget Password</Text> */}
-                    <Text style={{ fontSize: 18, textAlign: 'center', marginVertical: 30, color: COLORS.black }}>Please Enter Registred Email Address</Text>
+                    <Text style={{ fontSize: 14, textAlign: 'center', marginVertical: 30, color: COLORS.black ,fontFamily:Font.regular}}>Please Enter Registred Email Address</Text>
                     <CustomTextinput
                         PlaceHolder={'Enter Your Email'}
-                        icons={require('../../../Assets/Images/email.png')}
+                        icons={require('../../../Assets/Icons/mail.png')}
                         value={values.email}
                         onChangeText={handleChange('email')}
                         onBlur={() => setFieldTouched('email')}

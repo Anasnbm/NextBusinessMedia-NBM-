@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
     padding: 13,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 25,
     borderWidth:1
   },
   textStyle: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: 'bold',
-    fontFamily: Font.regular,
+    fontFamily: Font.semibold,
   },
 });

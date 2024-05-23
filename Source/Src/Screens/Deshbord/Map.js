@@ -18,14 +18,14 @@ const MapContainer = () => {
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         region={{
-          latitude: 25.21116375722875, 
-          longitude: 55.286458177791516,
+          latitude:  25.229958059472196, 
+          longitude: 55.35825059733256,
           latitudeDelta: 0.015,
           longitudeDelta: 0.112,
         }}
       >
         <Marker
-          coordinate={{ latitude: 25.2707004, longitude: 55.2759745 }}
+          coordinate={{ latitude: 25.229958059472196, longitude: 55.35825059733256 }}
           title={'AgriNext Awards and Conference'}
           description={'Crowne Plaza | Dubai - United Arab Emirates'}
         />

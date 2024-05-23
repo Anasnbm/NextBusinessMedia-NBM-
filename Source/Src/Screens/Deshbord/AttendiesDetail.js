@@ -13,7 +13,11 @@ const AttendiesDetail = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedItems, setSelectedItems] = useState({});
+  const [id,setId]=useState(1)
   const navigation = useNavigation()
+  const vsual=()=>{
+    setId(2)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,12 +32,7 @@ const AttendiesDetail = () => {
 
     fetchData();
   }, []);
-  const toggleSelection = (id) => {
-    setSelectedItems(prevState => ({
-      ...prevState,
-      [id]: !prevState[id]
-    }));
-  }
+ 
 
   useEffect(() => {
     const searchUsers = async () => {
@@ -53,39 +52,20 @@ const AttendiesDetail = () => {
   }, [searchQuery]);
 
   const renderItem = ({ item }) => {
-    const isSelected = selectedItems[item.id] === true;
+
     return (
-      <TouchableOpacity
-        style={[
-          styles.containerBox,
-          { borderColor: isSelected ? 'blue' : 'blue' }
-        ]}
-        onPress={() => toggleSelection(item.id)}>
-        {isSelected ? (
+      
           <>
 
-            <Text style={{ fontSize: 14, fontWeight: '500', fontFamily: Font.regular }}>{item.description}</Text>
-            <View style={{ flexDirection: 'row', gap: 10, marginTop: 30 }}>
-              <TouchableOpacity>
-                <Image source={require('../../../Assets/Images/users/SocalImage/Email.png')} style={{ height: 30, width: 30 }} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image source={require('../../../Assets/Images/users/SocalImage/facebook.png')} style={{ height: 30, width: 30 }} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image source={require('../../../Assets/Images/users/SocalImage/twiter.png')} style={{ height: 30, width: 30 }} />
-              </TouchableOpacity>
-
-            </View>
-          </>
-        ) : (
-          <>
-            <Image source={{ uri: item.thumbnail }} style={{ height: 120, width: 120, borderRadius: 15, resizeMode: 'contain' }} />
-            <Text style={{ fontSize: 16, fontWeight: 'bold', fontFamily: Font.regular, textAlign: 'center' }}>{item.title}</Text>
-            <Text style={{ fontSize: 16, fontWeight: '500', fontFamily: Font.regular, color: COLORS.blue }}>{`$${item.price}`}</Text>
-          </>
-        )}
-      </TouchableOpacity>
+          <TouchableOpacity style={styles.containerBox}
+          onPress={()=>navigation.navigate('DetailsInformation', { data: item })}
+          >
+            <Image source={{ uri: item.thumbnail }} style={{ height: 100, width: 150, borderRadius: 8, }}
+             />
+            <Text style={{ fontSize: 14, fontWeight: 'bold', fontFamily: Font.regular, textAlign: 'center' }}>{item.title}</Text>
+            <Text style={{ fontSize: 12, fontWeight: '500', fontFamily: Font.regular, color: COLORS.blue }}>{`$${item.price}`}</Text>
+          </TouchableOpacity>
+     </>
     )
   }
 
@@ -100,7 +80,7 @@ const AttendiesDetail = () => {
       <FlatList
         data={filteredUsers}
         renderItem={renderItem}
-        numColumns={2}
+        numColumns={id==false ? 1 : 2}
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
@@ -120,7 +100,7 @@ const styles = StyleSheet.create({
   containerBox: {
     borderColor: COLORS.blue,
     borderWidth: 1,
-    padding: 15,
+    padding: 10,
     marginRight: 15,
     borderRadius: 10,
     width: Width * 0.43,

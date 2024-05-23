@@ -1,6 +1,8 @@
 import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
-import { COLORS, CommonStyles } from '../../Theme/Colors'
+import { COLORS, CommonStyles, Font } from '../../Theme/Colors'
+import CustomHeader from '../../Component/Commonheader/CustomHeader';
+import { useNavigation } from '@react-navigation/native';
 const data = [
     {
         id: 1,
@@ -62,7 +64,7 @@ const Item = ({ item }) => {
                         <Text style={[CommonStyles.text, { marginTop: 5, fontWeight: 'bold' }]}>{item.location}</Text>
                     </View>
                     <TouchableOpacity onPress={saveItem}>
-                        <Image source={isSaved ? item.Image1 : item.saveIcon} style={{ height: isSaved ? 30 : 30, width: isSaved ? 30 : 30 }} />
+                        <Image source={isSaved ? item.Image1 : item.saveIcon} style={{ height: isSaved ? 25 : 30, width: isSaved ? 25 : 25}} />
                     </TouchableOpacity>
                 </View>
                 <Text style={[CommonStyles.text, { marginTop: 10, fontWeight: '600' }]}>{item.text}</Text>
@@ -72,8 +74,8 @@ const Item = ({ item }) => {
 };
 
 const Agenda = () => {
+    const navigation=useNavigation();
     const renderItem = ({ item }) => {
-
 
         return (
             <>
@@ -99,10 +101,11 @@ const Agenda = () => {
     }
     return (
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+            <CustomHeader back={true} left={true} title={'Agenda'} OnPress={()=>navigation.goBack()}/>
             <Text style={styles.heading}>Schedule</Text>
             <Text style={[styles.heading, { fontSize: 16 }]}>Agriculture and Technology Awards and Conference</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ width: '65%', marginTop: 20, fontSize: 16, color: COLORS.black }}>Join us for a conversation on the impact of climate change on the agreeculture Industry</Text>
+                <Text style={{ width: '65%', marginTop: 20, fontSize: 16, color: COLORS.black,fontFamily:Font.regular }}>Join us for a conversation on the impact of climate change on the agreeculture Industry</Text>
                 <Image source={require('../../../Assets/Images/agree.jpg')} style={{ height: 150, width: 150, }} />
             </View>
             <Text style={styles.heading}>1st Day {'\n'} November 13, 2024</Text>
@@ -112,6 +115,12 @@ const Agenda = () => {
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={{ paddingBottom: 30 }} />
             <Text style={styles.heading}>2nd Day {'\n'} November 13, 2024</Text>
+            <FlatList
+                data={data}
+                //   renderItem={renderItem}
+                renderItem={({ item }) => <Item item={item} />}
+                contentContainerStyle={{ paddingBottom: 30 }} />
+                <Text style={styles.heading}>3rd Day {'\n'} November 13, 2024</Text>
             <FlatList
                 data={data}
                 //   renderItem={renderItem}
@@ -133,7 +142,8 @@ const styles = StyleSheet.create({
     heading: {
         fontSize: 25,
         color: COLORS.black,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily:Font.bold
     },
     cardContainer: {
         flexDirection: 'row',
