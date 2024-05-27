@@ -223,7 +223,9 @@ function BottomTab({ bgColor }) {
               />
             </TouchableOpacity>
           ),
-        }} />
+          
+        }}
+    />
         <Tab.Screen name="Message" component={Message} options={{
           tabBarLabel: 'Networking',
           tabBarIcon: ({ color, size, focused }) => (

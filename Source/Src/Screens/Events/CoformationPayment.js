@@ -1,11 +1,15 @@
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { COLORS, Font } from '../../Theme/Colors'
 import CustomHeader from '../../Component/Commonheader/CustomHeader'
 import { useNavigation } from '@react-navigation/native'
 import CustomButton from '../../Component/CommunButton/CustomButton'
+import { DataContext } from '../../../../DataContext'
 
 const CoformationPayment = () => {
+  const { getBgColor } = useContext(DataContext);
+  const bgColor = getBgColor();
+  console.log('jamshed',bgColor)
   const navigation=useNavigation()
   return (
     <View style={styles.container}>

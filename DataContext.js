@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { COLORS } from './Source/Src/Theme/Colors';
+import { AgreeNextEventdata, FinextEventdata } from './Source/Src/Screens/Deshbord/Home';
 
 export const DataContext = createContext();
 
@@ -58,9 +59,17 @@ export const DataProvider = ({ children }) => {
         screen: 'MainDeshbord'
       },
   ]);
-
+  const [selectedId, setSelectedId] = useState(null);
+  const [events, setEvents] = useState({
+    finext: FinextEventdata,
+    agrinext: AgreeNextEventdata,
+  });
+  const getBgColor = () => {
+    const selectedItem = data.find(item => item.id === selectedId);
+    return selectedItem?.bgColor 
+  };
   return (
-    <DataContext.Provider value={{ data, setData }}>
+    <DataContext.Provider value={{ data, setData, events, setEvents, selectedId, setSelectedId, getBgColor}}>
       {children}
     </DataContext.Provider>
   );

@@ -11,7 +11,7 @@ const Weight = Dimensions.get('window').width
 const DetailsInformation = () => {
   const navigation = useNavigation()
   const route = useRoute();
-   console.log('apijdhgddjhsh----',route.params.data.image2)
+  console.log('apijdhgddjhsh----', route.params.data.image2)
   return (
     <SafeAreaView style={styles.safecontainer}>
       <StatusBar translucent={true} />
@@ -19,8 +19,8 @@ const DetailsInformation = () => {
       <Image
         source={require('../../../Assets/Images/Speaker.jpg')}
         resizeMode={'cover'} style={{ height: height * 0.2, width: Weight }}
-       
-        />
+
+      />
       <View style={{ position: 'absolute', padding: 10, top: 50 }}>
 
         <CustomHeader back={true} left={true} OnPress={() => navigation.goBack()} textcolor={true}>
@@ -28,10 +28,10 @@ const DetailsInformation = () => {
         </CustomHeader>
       </View>
       <View style={{ bottom: 45, paddingHorizontal: 15 }}>
-        <Image source={{ uri: route.params.data.thumbnail || route.params.data.image2}} style={{ height: 100, width: 100, borderRadius: 15 }}
+        <Image source={{ uri: route.params.data.thumbnail || route.params.data.image2 }} style={{ height: 100, width: 100, borderRadius: 15 }}
         />
-<Text style={CommonStyles.boldText}
->{route.params.data.title || route.params.data.name}</Text>
+        <Text style={CommonStyles.boldText}
+        >{route.params.data.title || route.params.data.name}</Text>
 
         <Text style={CommonStyles.text}>{route.params.data.description || route.params.data.name1}</Text>
       </View>
@@ -74,7 +74,7 @@ const DetailsInformation = () => {
       <View style={{ paddingHorizontal: 15 }}>
         <Text style={CommonStyles.boldText}>About</Text>
         <Text style={CommonStyles.text}
-       >Megumi Avigail Yoshitomi is the
+        >Megumi Avigail Yoshitomi is the
           President of the Japan Association for Cellular Agriculture
           , a non-profit thinktank for cellular agriculture policy
           in Japan. She is one of the advisory boards for the

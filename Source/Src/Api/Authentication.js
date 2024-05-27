@@ -1,22 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
 import axios from 'axios';
-
-const Test = () => {
-
-const registerUser = async (userData) => {
-  const url = 'http://3.77.200.124:3002/api/auth/register';
+const BaseUrl = 'http://3.77.200.124:3002/api';
+export const registerUser = async (userData) => {
+  const url = `${BaseUrl}/auth/register`;
   try {
     const response = await axios.post(url, userData);
     console.log('Registration successful', response.data);
     return response.data;
-    // console.log(response)
   } catch (error) {
     console.error('Error registering user', error.response ? error.response.data : error.message);
     throw error;
   }
 };
 
+// Example usage
 const userData = {
   name: 'John Doe',
   email: 'john.doe@example.com',
@@ -35,14 +31,3 @@ registerUser(userData)
     // Handle registration error
     console.error('Registration error:', error);
   });
-
-  return (
-    <View>
-      <Text>Test</Text>
-    </View>
-  )
-}
-
-export default Test
-
-const styles = StyleSheet.create({})

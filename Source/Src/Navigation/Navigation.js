@@ -32,6 +32,8 @@ import QrCodeScanner from '../Screens/Events/QrCodeScanner';
 import TermAndConditon from '../Screens/Term&Condition/TermAndConditon';
 import NotificationScreen from '../Screens/Deshbord/SwipeableList';
 import CommonCustomCard from '../Component/CommonCard/CommonCustomCard';
+import EventDetail from '../Screens/Deshbord/EventDetail';
+import ViewPass from '../Screens/Events/ViewPass';
 const Stack = createNativeStackNavigator();
 const Navigatior = ({screens}) => {
   return (
@@ -46,6 +48,7 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="Deshbord" component={Deshbord} />
         <Stack.Screen name="DeshbordVenue" component={DeshbordVenue} />
         <Stack.Screen name="MainDeshbord" component={MainDeshbord} />
+        <Stack.Screen name="EventDetail" component={EventDetail} />
         <Stack.Screen name="DetailsInformation" component={DetailsInformation} />
         <Stack.Screen name="UpcommingEvents" component={UpcommingEvents} />
         <Stack.Screen name="MyCalendar" component={MyCalendar} />
@@ -74,6 +77,7 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="CommonCustomCard" component={CommonCustomCard} />
         <Stack.Screen name="QrCodeScanner" component={QrCodeScanner} />
+        <Stack.Screen name="ViewPass" component={ViewPass} />
         {/* terms -------------------------- */}
         <Stack.Screen name="TermAndConditon" component={TermAndConditon} />
    

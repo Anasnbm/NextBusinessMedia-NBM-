@@ -1,7 +1,12 @@
 import { StatusBar, StyleSheet, Text, View,Image, FlatList, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { COLORS, Font } from '../../Theme/Colors'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import CommonCustomCard from '../../Component/CommonCard/CommonCustomCard'
+import Data from '../../Api/Data'
+import { speakerData } from '../../Api/FinextData'
+import { AgreeNextEventdata } from '../Deshbord/Home'
+import { DataContext } from '../../../../DataContext'
 
 
 
@@ -37,6 +42,9 @@ const data=[
 
 const EventList = () => {
   const navigation=useNavigation()
+  const { getBgColor } = useContext(DataContext);
+  const bgColor = getBgColor();
+  console.log(bgColor)
   const renderItem=({item,index})=>{
     return(
       <TouchableOpacity style={styles.Box} activeOpacity={0.5}
@@ -56,13 +64,14 @@ const EventList = () => {
   }
   return (
     <View style={styles.container}>
-        <StatusBar translucent={false}/>
+        {/* <StatusBar translucent={false}/>
       <FlatList
 
       data={data}
       renderItem={renderItem}
       keyExtractor={(item)=>item.id.toString()}
-      />
+      /> */}
+        <CommonCustomCard data={AgreeNextEventdata} heading={'Upcomming Event'} RenderId={4} shadowColor={COLORS.green} />
       
     </View>
   )
@@ -74,7 +83,7 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         backgroundColor:COLORS.white,
-        padding:15
+        paddingHorizontal:15
         
     },
     Box:{
@@ -82,7 +91,7 @@ const styles = StyleSheet.create({
      borderWidth:0.5,
     //  
     borderRadius:10,
-marginTop:15
+// marginTop:15
     },
     BigIcon:{
       height:150,

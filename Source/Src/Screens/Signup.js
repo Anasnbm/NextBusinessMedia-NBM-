@@ -1,28 +1,27 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView, KeyboardAvoidingView, StatusBar } from 'react-native';
+import { Image, StyleSheet, Text, View, Dimensions, ScrollView, SafeAreaView, KeyboardAvoidingView, StatusBar, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
 import CustomButton from '../Component/CommunButton/CustomButton';
 import CustomTextinput from '../Component/CommonTextInput/CustomTextinput';
 import { COLORS, Font } from '../Theme/Colors';
-import { firebase } from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import database from '@react-native-firebase/database';
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
 import { Switch } from 'react-native-paper';
 import CountryPickerComponent from '../Component/CommonTextInput/CountryPicker';
+
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-  // lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+  fullName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   email: Yup.string().email('Invalid email').required('Required'),
+  CompaneyName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
   phone: Yup.string()
     .matches(/^[0-9]{10,13}$/, 'Phone number must be between 10 and 13 digits')
     .required('Required'),
-  password: Yup.string().min(2, 'Too Short!').max(15, 'Too Long!').required('Required').matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, 'Minimum eight characters, at least one letter and one number'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Please confirm your password'),
+  Companey_phone: Yup.string()
+    .matches(/^[0-9]{10,13}$/, 'Phone number must be between 10 and 13 digits')
+    .required('Required'),
+  password: Yup.string().min(6, 'Too Short!').max(15, 'Too Long!').required('Required')
 });
 
 const Width = Dimensions.get('window').width;
@@ -30,9 +29,8 @@ const Height = Dimensions.get('window').height;
 
 const Signup = () => {
   const navigation = useNavigation();
-
   const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn)
+  const onToggleSwitch = () => setIsSwitchOn(!isSwitchOn);
 
   const showMessageHandler = (success) => {
     showMessage({
@@ -45,106 +43,73 @@ const Signup = () => {
     });
   };
 
-  const handleSignup = async (values) => {
-    // console.log('hi')
-    // const { firstName, lastName, email, phone, password,confirmPassword } = values;
-    // try {
-    //   // Create user with email and password
-    //   const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-    //   const user = userCredential.user;
-    //   console.log(user)
-    //   // await firebase.firestore().collection('Auth').doc('signIn').set({
-    //   //   firstName: firstName,
-    //   //   lastName: lastName,
-    //   //   email: email,
-    //   //   phone: phone,
-    //   //   password:password,
-    //   //   confirmPassword:confirmPassword
-    //   // });
-    //   const reference = database().ref(`/Auth/SignUp/${firstName}`).push(); // Generate a unique ID for the user
-    //   await reference.set({
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     email: email,
-    //     phone: phone,
-    //     password:password,
-    //     confirmPassword:confirmPassword
-    //   });
-    //   // Optionally, you can also save additional user data to Firestore or Realtime Database
-
-    //   console.log('User registered successfully:', user);
-    //   // Navigate to the next screen or perform other actions
-    // } catch (error) {
-    //   console.error('Error signing up:', error);
-    //   // Handle signup error (display error message, etc.)
-    // }
+  const handleSignup = async (values, { resetForm }) => {
+    const url = 'http://3.77.200.124:3002/api/auth/register';
+    try {
+      const response = await axios.post(url, {
+        name: values.fullName,
+        email: values.email,
+        company: values.CompaneyName,
+        personal_phone: values.phone,
+        company_phone: values.Companey_phone,
+        password: values.password,
+      });
+      console.log('Registration successful', response.data);
+  
+     
+  
+      try {
+        await navigation.navigate('Login'); // Navigate to the Login screen
+        resetForm();
+      } catch (error) {
+        console.error('Error navigating to Login screen', error);
+        showMessageHandler(false);
+      }
+    } catch (error) {
+      console.error('Error registering user', error.response ? error.response.data : error.message);
+      showMessageHandler(false);
+    }
   };
+  
+  
 
   return (
     <Formik
       initialValues={{
-        firstName: '',
-        // lastName: '',
+        fullName: '',
         email: '',
+        CompaneyName: '',
         phone: '',
+        Companey_phone: '',
         password: '',
-        confirmPassword: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={values => {
-        try {
-          console.log('Signup values:', values);
-          handleSignup(values)
-          showMessageHandler(true);
-
-        } catch (error) {
-          console.error('Error signing up:', error);
-          // Assuming the error is due to email already registered
-          showMessageHandler(false);
-          // Handle signup error (display error message, etc.)
-        }
-
-      }}
+      onSubmit={(values, { resetForm }) => handleSignup(values, resetForm)}
     >
       {({ errors, touched, values, handleChange, setFieldTouched, handleSubmit, isValid }) => (
-
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>
           <StatusBar translucent={true} />
           <SafeAreaView style={styles.container}>
-            {/* <Image source={require('../../Assets/Images/Ellipse1.png')} style={styles.topImage1} /> */}
             <Image source={require('../../Assets/Images/Ellipse.png')} style={styles.topImage} />
             <ScrollView showsVerticalScrollIndicator={false}>
               <Image source={require('../../Assets/Images/NBMLogo.png')} style={styles.img} />
 
-              <View style={styles.box} showsVerticalScrollIndicator={false}>
-                {/* <Image source={require('../../Assets/Images/NBMLogo.png')} style={styles.Image} /> */}
+              <View style={styles.box}>
                 <Text style={[styles.Heading, { top: 8 }]}>Sign up</Text>
 
                 <CustomTextinput
-                  PlaceHolder={'First Name'}
+                  PlaceHolder={'Full Name'}
                   icons={require('../../Assets/Icons/people.png')}
-                  value={values.firstName}
-                  onChangeText={handleChange('firstName')}
-                  onBlur={() => setFieldTouched('firstName')}
-                  error={errors.firstName}
-                  touched={touched.firstName}
+                  value={values.fullName}
+                  onChangeText={handleChange('fullName')}
+                  onBlur={() => setFieldTouched('fullName')}
+                  error={errors.fullName}
+                  touched={touched.fullName}
                 />
-                {touched.firstName && errors.firstName && (
-                  <Text style={styles.validation}>{errors.firstName}</Text>
+                {touched.fullName && errors.fullName && (
+                  <Text style={styles.validation}>{errors.fullName}</Text>
                 )}
-                {/* <CustomTextinput
-                PlaceHolder={'Last Name'}
-                icons={require('../../Assets/Images/user.png')}
-                value={values.lastName}
-                onChangeText={handleChange('lastName')}
-                onBlur={() => setFieldTouched('lastName')}
-                error={errors.lastName}
-                touched={touched.lastName}
 
-              /> */}
-                {touched.lastName && errors.lastName && (
-                  <Text style={styles.validation}>{errors.lastName}</Text>
-                )}
                 <CustomTextinput
                   PlaceHolder={'Your Email'}
                   icons={require('../../Assets/Icons/mail.png')}
@@ -157,17 +122,46 @@ const Signup = () => {
                 {touched.email && errors.email && (
                   <Text style={styles.validation}>{errors.email}</Text>
                 )}
+
+                <CustomTextinput
+                  PlaceHolder={'Your Companey Name'}
+                  icons={require('../../Assets/Icons/people.png')}
+                  value={values.CompaneyName}
+                  onChangeText={handleChange('CompaneyName')}
+                  onBlur={() => setFieldTouched('CompaneyName')}
+                  error={errors.CompaneyName}
+                  touched={touched.CompaneyName}
+                />
+                {touched.CompaneyName && errors.CompaneyName && (
+                  <Text style={styles.validation}>{errors.CompaneyName}</Text>
+                )}
+
                 <CountryPickerComponent
-                  PlaceHolder={'Phone'}
+                  PlaceHolder={'Personal Phone'}
                   icons={require('../../Assets/Icons/telephone.png')}
                   value={values.phone}
                   onChangeText={handleChange('phone')}
                   onBlur={() => setFieldTouched('phone')}
                   error={errors.phone}
-                  touched={touched.phone} />
+                  touched={touched.phone}
+                />
                 {touched.phone && errors.phone && (
                   <Text style={styles.validation}>{errors.phone}</Text>
                 )}
+
+                <CountryPickerComponent
+                  PlaceHolder={'Company Phone'}
+                  icons={require('../../Assets/Icons/telephone.png')}
+                  value={values.Companey_phone}
+                  onChangeText={handleChange('Companey_phone')}
+                  onBlur={() => setFieldTouched('Companey_phone')}
+                  error={errors.Companey_phone}
+                  touched={touched.Companey_phone}
+                />
+                {touched.Companey_phone && errors.Companey_phone && (
+                  <Text style={styles.validation}>{errors.Companey_phone}</Text>
+                )}
+
                 <CustomTextinput
                   PlaceHolder={'Password'}
                   secure={true}
@@ -182,41 +176,26 @@ const Signup = () => {
                 {touched.password && errors.password && (
                   <Text style={styles.validation}>{errors.password}</Text>
                 )}
-                <CustomTextinput
-                  PlaceHolder={'Confirm Password'}
-                  secure={true}
-                  value={values.confirmPassword}
-                  icons={require('../../Assets/Icons/lock.png')}
-                  onChangeText={handleChange('confirmPassword')}
-                  onBlur={() => setFieldTouched('confirmPassword')}
-                  error={errors.confirmPassword}
-                  LockIcon={true}
-                  touched={touched.confirmPassword}
-                />
-                {touched.confirmPassword && errors.confirmPassword && (
-                  <Text style={styles.validation}>{errors.confirmPassword}</Text>
-                )}
+
                 <View style={{ alignSelf: 'flex-start', marginTop: 15, flexDirection: 'row', justifyContent: "space-between" }}>
-                  <Switch value={isSwitchOn} onValueChange={onToggleSwitch}
-                    color={COLORS.blue} />
-                  <Text style={styles.texT}>By Continuiting You Agree To NBM <Text style={styles.intrnalText}
-                    onPress={() => navigation.navigate('TermAndConditon')}>Terms and PrivacyPolicy</Text></Text>
+                  <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color={COLORS.blue} />
+                  <Text style={styles.texT}>By continuing, you agree to NBM's <Text style={styles.intrnalText} onPress={() => navigation.navigate('TermAndConditon')}>Terms and Privacy Policy</Text></Text>
                 </View>
-                <View style={{ width: '90%', alignSelf: 'center',marginTop:20 }}>
+
+                <View style={{ width: '90%', alignSelf: 'center', marginTop: 20 }}>
                   <CustomButton
                     title={'SIGN UP'}
-                    bgColor={COLORS.blue} // <-- Use bgColor instead of Bgcolor
-                    textColor={COLORS.white} // <-- Use textColor instead of color
+                    bgColor={COLORS.blue}
+                    textColor={COLORS.white}
                     borderColor={COLORS.blue}
                     onPress={handleSubmit}
                   />
                 </View>
-                <Text style={[styles.texT, { alignSelf: 'center', marginTop: 10 }]}>Already have an account ?  <Text style={[styles.texT, { fontSize: 14, alignSelf: 'center', color: COLORS.primeryBlue, fontWeight: "700",left:30 }]} onPress={() => navigation.navigate('Login')}>Login</Text>
+
+                <Text style={[styles.texT, { alignSelf: 'center', marginTop: 10 }]}>Already have an account? <Text style={[styles.texT, { fontSize: 14, alignSelf: 'center', color: COLORS.primeryBlue, fontWeight: "700", left: 30 }]} onPress={() => navigation.navigate('Login')}>Login</Text>
                 </Text>
               </View>
-
             </ScrollView>
-
           </SafeAreaView>
         </KeyboardAvoidingView>
       )}
@@ -228,31 +207,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-
   },
   box: {
     padding: 25,
-
   },
   Heading: {
     fontSize: 20,
     color: COLORS.black,
     fontWeight: '800',
-    fontFamily: Font.semibold
+    fontFamily: Font.semibold,
   },
   heading1: {
     fontSize: 16,
-    // color: COLORS.blue,
     fontWeight: '500',
     fontFamily: Font.regular,
     alignSelf: 'flex-end',
-    marginVertical: 6
+    marginVertical: 6,
   },
   Image: {
     height: Height * 0.1,
     width: Width * 0.4,
     alignSelf: 'center',
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
   validation: {
     fontSize: 12,
@@ -263,26 +239,26 @@ const styles = StyleSheet.create({
     height: 60,
     width: 150,
     resizeMode: 'contain',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   topImage: {
-    alignSelf: 'flex-end'
+    alignSelf: 'flex-end',
   },
   topImage1: {
     alignSelf: 'flex-start',
-    position: 'absolute'
+    position: 'absolute',
   },
   texT: {
     fontSize: 14,
     color: COLORS.black,
-    fontFamily: Font.regular
+    fontFamily: Font.regular,
   },
   intrnalText: {
     fontSize: 14,
     color: COLORS.black,
     fontFamily: Font.bold,
-    fontWeight: '800'
-  }
+    fontWeight: '800',
+  },
 });
 
 export default Signup;

@@ -15,7 +15,58 @@ import { TransportData, MediaPartnerTransport } from '../../Api/DataTransPort'
 import { attendiesData, speakerData } from '../../Api/FinextData'
 import CommonCustomCard from '../../Component/CommonCard/CommonCustomCard'
 
-
+export const FinextEventdata=[
+  {
+    BgImage:require('../../../Assets/Images/GirlImage.png'),
+    name:"Finext Conference Moracco 2024",
+    date:'25-26 September, 2024',
+    time:'09:00 AM TO 6:00 PM',
+    Location:'Marrakesh, Morocco',
+    City:'Morocco',
+    organizer:'Internetshine Technologies',
+    TexT:'FiNext Conference is owned and supported by InternetShine Corp, USA. The conference was created to provide a digital hub and meeting place for the global financial sector, allowing tech start-ups, SMEs, incumbent tech providers, investors, institutions, and other stakeholders to connect and interact under one roof',
+    companey:'organizer',
+    CommonColor:COLORS.finext
+  },
+  {
+    BgImage:require('../../../Assets/Images/GirlImage.png'),
+    name:"Finext Conference Moracco 2024",
+    date:'25-26 September, 2024',
+    time:'09:00 AM TO 6:00 PM',
+    Location:'Marrakesh, Morocco',
+    City:'Morocco',
+    organizer:'Internetshine Technologies',
+    TexT:'FiNext Conference is owned and supported by InternetShine Corp, USA. The conference was created to provide a digital hub and meeting place for the global financial sector, allowing tech start-ups, SMEs, incumbent tech providers, investors, institutions, and other stakeholders to connect and interact under one roof',
+    companey:'organizer',
+    CommonColor:COLORS.finext
+  },
+]
+export const AgreeNextEventdata=[
+  {
+    BgImage:require('../../../Assets/Images/GirlImage.png'),
+    name:"AgriNext Conference Dubai 2024",
+    date:'13-14 November 2024',
+    time:'09:00 AM TO 6:00 PM',
+    Location:'Crowne Plaza Dubai',
+    City:'Dubai',
+    organizer:'Internetshine Technologies',
+    TexT:'FiNext Conference is owned and supported by InternetShine Corp, USA. The conference was created to provide a digital hub and meeting place for the global financial sector, allowing tech start-ups, SMEs, incumbent tech providers, investors, institutions, and other stakeholders to connect and interact under one roof',
+    companey:'organizer',
+    CommonColor:COLORS.green
+  },
+  {
+    BgImage:require('../../../Assets/Images/GirlImage.png'),
+    name:"AgriNext Conference Dubai 2024",
+    date:'13-14 November 2024',
+    time:'09:00 AM TO 6:00 PM',
+    Location:'Crowne Plaza Dubai',
+    City:'Dubai',
+    organizer:'Internetshine Technologies',
+    TexT:'FiNext Conference is owned and supported by InternetShine Corp, USA. The conference was created to provide a digital hub and meeting place for the global financial sector, allowing tech start-ups, SMEs, incumbent tech providers, investors, institutions, and other stakeholders to connect and interact under one roof',
+    companey:'organizer',
+    CommonColor:COLORS.green
+  },
+]
 
 
 
@@ -59,7 +110,7 @@ const Home = () => {
       {showId === '1' ?
         <>
           {/* <SliderBox1 /> */}
-          <CommonCustomCard data={data} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.green} />
+          <CommonCustomCard data={AgreeNextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.green} />
           <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.green} />
           <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.green} />
           <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.green} />
@@ -72,7 +123,7 @@ const Home = () => {
       {showId === '2' ?
         <>
           {/* <SliderBox1 /> */}
-          <CommonCustomCard data={data} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.finext} />
+          <CommonCustomCard data={FinextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.finext} />
           <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.finext} />
           <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.finext} />
           <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.finext} />

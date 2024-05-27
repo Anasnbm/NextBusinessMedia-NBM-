@@ -1,93 +1,98 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity ,ScrollView} from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native'
+import React, { useContext, useState } from 'react'
 import { COLORS } from '../../Theme/Colors'
 import QRCode from 'react-native-qrcode-svg';
 import CustomButton from '../../Component/CommunButton/CustomButton';
 import CustomHeader from '../../Component/Commonheader/CustomHeader';
 import { useNavigation } from '@react-navigation/native';
-
+import { DataContext } from '../../../../DataContext';
+import { height, width } from 'react-native-dimension';
 const SuccessFulPayment = () => {
-    const navigation=useNavigation()
-    const [qrCodeSize, setQrCodeSize] = useState(150);
-
-    const toggleQrCodeSize = () => {
-        const newSize = qrCodeSize === 150 ? 250 : 150;
-        setQrCodeSize(newSize);
-    };
+    const navigation = useNavigation()
     return (
-      <>
+        <>
 
-        <ScrollView style={styles.container}
-        showsVerticalScrollIndicator={false}>
-            <CustomHeader back={true} left={true} title={'Ticket'}
-            OnPress={()=>navigation.goBack()}/>
-            <Image source={require('../../../Assets/Images/Success.png')}
-                style={styles.Successimg} />
-            <View style={styles.Box}>
-                <View style={styles.boxItem}>
-                    <Text style={styles.text}>Full Name</Text>
-                    <Text style={styles.text}>Abceegfgtha</Text>
+            <SafeAreaView style={styles.container}
+                showsVerticalScrollIndicator={false}>
+                <View style={{ alignSelf: 'flex-start', paddingHorizontal: 20 }}>
+                    <CustomHeader back={true} left={true} title={'Ticket'}
+                        OnPress={() => navigation.goBack()} />
                 </View>
-                <View style={styles.Line}>
+                {/* <Image source={require('../../../Assets/Images/Success.png')}
+                style={styles.Successimg} /> */}
+                <View style={{
+                    height: '50%', backgroundColor: '#EEEEEE', width: '80%', borderRadius: 5, shadowColor: COLORS.faint,
+                    shadowOffset: {
+                        width: 0,
+                        height: 7,
+                    },
+                    shadowOpacity: 0.43,
+                    shadowRadius: 9.51,
 
-                </View>
-
-
-                <View style={styles.boxItem}>
-                    <Text style={styles.text}>Event</Text>
-                    <Text style={styles.text}>AgriNext Awards, Conference & Expo</Text>
-                </View>
-                <View style={styles.Line}>
-
-                </View>
-
-
-
-                <View style={styles.boxItem}>
-                    <Text style={styles.text}>Location</Text>
-                    <Text style={styles.text}>Noda sec 15 Noida UP</Text>
-                </View>
-                <View style={styles.Line}>
-
-                </View>
-
-
-
-
-                <View style={styles.boxItem}>
-                    <Text style={styles.text}>Date & Time</Text>
-                    <Text style={styles.text}>12-Nov-2024</Text>
-                </View>
-                <View style={styles.Line}>
-
-                </View>
-
-                <View style={styles.boxItem}>
-                    <Text style={styles.text}>Ticket Type</Text>
-                    <Text style={styles.text}>VIP</Text>
-                </View>
-                <View style={styles.Line}>
-
-                </View>
-                <Text style={[styles.text, { alignSelf: 'center', fontSize: 20, marginTop: 20 }]}>QR CODE</Text>
-                <TouchableOpacity onPress={toggleQrCodeSize}>
-                    <View style={{ alignItems: 'center', marginTop: 10 }}>
-                        <QRCode value={'hello ji'} size={qrCodeSize} />
-                        {/* You can customize the QR code appearance or add participant details here */}
-                        {/* <Text>{participant.name}, {participant.age}</Text> */}
+                    elevation: 15,
+                }}>
+                    <View style={{ height: '46%', backgroundColor: '#EEEEEE', padding: 20, borderRadius: 5 }}>
+                        <Image source={require('../../../Assets/Images/Speaker.jpg')}
+                            style={{ height: 120, width: "100%", borderRadius: 10 }} />
+                        <Text style={{ color: COLORS.black, fontSize: 20, fontWeight: '800' }}>FiNext Awards & Conference | Morocco | 2024</Text>
                     </View>
-                </TouchableOpacity>
-
-            </View>
-           <View style={{marginBottom:40}}>
-           <CustomButton
-        title={'Go To Home'}
-        bgColor={COLORS.blue}
-        textColor={COLORS.white}
-        borderColor={COLORS.blue}
-        onPress={() => navigation.navigate('Deshbord')} />
-           </View>
-        </ScrollView></>
+                    <View
+                        style={{
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                        }}>
+                        <View
+                            style={{
+                                height: height(6),
+                                width: width(13),
+                                borderRadius: width(13),
+                                backgroundColor: 'white',
+                            }}
+                        />
+                        <Text style={{ color: 'grey' }}>
+                            - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                            - - - - - -
+                        </Text>
+                        <View
+                            style={{
+                                height: height(6),
+                                width: width(13),
+                                borderRadius: width(10),
+                                backgroundColor: 'white',
+                            }}
+                        />
+                    </View>
+                    <View style={{ padding: 20, gap: 10 }}>
+                        <View>
+                            <Text style={{ color: COLORS.faint, fontSize: 14 }}>Name</Text>
+                            <Text style={{ color: COLORS.black, fontSize: 14 }}>Jamshed</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <View>
+                                <Text style={{ color: COLORS.faint, fontSize: 14 }}>Date</Text>
+                                <Text style={{ color: COLORS.black, fontSize: 14 }}>20 February, 2024</Text>
+                            </View>
+                            <View>
+                                <Text style={{ color: COLORS.faint, fontSize: 14 }}>Time</Text>
+                                <Text style={{ color: COLORS.black, fontSize: 14 }}>10:00 AM</Text>
+                            </View>
+                        </View>
+                        <View>
+                            <Text style={{ color: COLORS.faint, fontSize: 14 }}>Location</Text>
+                            <Text style={{ color: COLORS.black, fontSize: 14 }}>Marrakesh, Morocco</Text>
+                        </View>
+                    </View>
+                </View>
+                <View style={{ width: '80%' }}>
+                    <CustomButton
+                        title={'View Pass'}
+                        bgColor={COLORS.blue}
+                        textColor={COLORS.white}
+                        borderColor={COLORS.blue}
+                        onPress={() => navigation.navigate('ViewPass')} />
+                </View>
+            </SafeAreaView></>
     )
 }
 
@@ -95,48 +100,13 @@ export default SuccessFulPayment
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        padding: 15,
+        flex: 1,
+        // padding: 15,
+        alignItems: 'center',
         backgroundColor: COLORS.white,
 
     },
-    Successimg: {
-        height: 100,
-        width: 100,
-        alignSelf: 'center',
-        marginBottom: 20
-    },
-    Box: {
-        // borderWidth: 1,
-        padding: 15,
-        // alignItems:'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.36,
-        shadowRadius: 1.68,
 
-        elevation: 4,
-        borderRadius: 8
-    },
-    boxItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 10
-    },
-    Line: {
-        height: 0.8,
-        width: '100%',
-        backgroundColor: COLORS.faint,
-        marginTop: 10
-    },
-    text: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: COLORS.black
 
-    }
+
 })
