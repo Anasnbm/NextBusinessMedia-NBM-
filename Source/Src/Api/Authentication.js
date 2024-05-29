@@ -1,5 +1,12 @@
 import axios from 'axios';
 const BaseUrl = 'http://3.77.200.124:3002/api';
+export const SignupApi=BaseUrl+'/auth/register'
+// export const LoginApi=BaseUrl+'/auth/login'
+
+
+
+
+
 export const registerUser = async (userData) => {
   const url = `${BaseUrl}/auth/register`;
   try {
@@ -31,3 +38,15 @@ registerUser(userData)
     // Handle registration error
     console.error('Registration error:', error);
   });
+
+
+  export const LoginApi = `${BaseUrl}/auth/login`;
+
+export const loginUser = async (email, password) => {
+  try {
+    const response = await axios.post(LoginApi, { email, password });
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : new Error('Network Error');
+  }
+};

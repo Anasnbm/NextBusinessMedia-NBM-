@@ -19,7 +19,6 @@ import MyTicket from '../Events/MyTicket';
 import EventMap from '../Events/EventMap';
 import EventList from '../Events/EventList';
 import QRScanner from '../Events/QrCodeScanner';
-import SwipeableListInfo from './SwipeableList';
 import SignOut from '../SignOut';
 
 const Tab = createBottomTabNavigator();
@@ -30,7 +29,7 @@ function EmptyScreen() {
 }
 
 const HomeHeader = ({ navigation, bgColor }) => {
-  console.log('======',bgColor)
+  // console.log('======',bgColor)
   const [text, setText] = useState('');
 
   return (
@@ -114,7 +113,7 @@ const MainDeshbord = () => {
         drawerIcon: ({ color, size }) => (
           <MaterialCommunityIcons
             name="view-agenda"
-            color={color}
+            // color={color}
             size={size}
           />
         ),
@@ -123,29 +122,37 @@ const MainDeshbord = () => {
         drawerIcon: ({ color, size }) => (
           <MaterialCommunityIcons
             name="ticket-confirmation"
-            color={color}
+            // color={color}
             size={size}
           />
         ),
       }} />
       <Drawer.Screen name="Calender" component={UpcommingEvents} options={{
         drawerIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="calendar" color={color} size={size} />
+          <MaterialCommunityIcons name="calendar" 
+          // color={color} 
+          size={size} />
         ),
       }} />
       <Drawer.Screen name="QRScanner" component={QRScanner} options={{
         drawerIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="calendar" color={color} size={size} />
+          <MaterialCommunityIcons name="calendar"
+          //  color={color} 
+           size={size} />
         ),
       }} />
       <Drawer.Screen name="Aboutus" component={Aboutus} options={{
         drawerIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="alpha-a-box" color={color} size={size} />
+          <MaterialCommunityIcons name="alpha-a-box" 
+          // color={color} 
+          size={size} />
         ),
       }} />
       <Drawer.Screen name="Signout" component={SignOut} options={{
         drawerIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="file-replace-outline" color={color} size={size} />
+          <MaterialCommunityIcons name="file-replace-outline" 
+          // color={color} 
+          size={size} />
         ),
       }} />
     </Drawer.Navigator>
@@ -225,6 +232,7 @@ function BottomTab({ bgColor }) {
           ),
           
         }}
+        initialParams={{ bgColor }}
     />
         <Tab.Screen name="Message" component={Message} options={{
           tabBarLabel: 'Networking',

@@ -1,5 +1,5 @@
 import { StatusBar, StyleSheet, Text, View,Image, FlatList, TouchableOpacity } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { COLORS, Font } from '../../Theme/Colors'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import CommonCustomCard from '../../Component/CommonCard/CommonCustomCard'
@@ -7,7 +7,7 @@ import Data from '../../Api/Data'
 import { speakerData } from '../../Api/FinextData'
 import { AgreeNextEventdata } from '../Deshbord/Home'
 import { DataContext } from '../../../../DataContext'
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const data=[
@@ -42,9 +42,28 @@ const data=[
 
 const EventList = () => {
   const navigation=useNavigation()
-  const { getBgColor } = useContext(DataContext);
-  const bgColor = getBgColor();
-  console.log(bgColor)
+  const { getBgColor, setSelectedId } = useContext(DataContext);
+  const [getId, setgetId] = useState('');
+  const CommonColor = getBgColor();
+
+  // console.log('bgColor:', bgColor);
+
+  useEffect(() => {
+    const getAsyncStorageData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('selectedId');
+        if (value !== null) {
+          // console.log('Selected ID from AsyncStorage:', value);
+          setgetId(value);
+          setSelectedId(Number(value)); // Set the selectedId in the context
+        }
+      } catch (error) {
+        console.error('Error retrieving data from AsyncStorage:', error);
+      }
+    };
+
+    getAsyncStorageData();
+  }, []);
   const renderItem=({item,index})=>{
     return(
       <TouchableOpacity style={styles.Box} activeOpacity={0.5}
@@ -71,7 +90,7 @@ const EventList = () => {
       renderItem={renderItem}
       keyExtractor={(item)=>item.id.toString()}
       /> */}
-        <CommonCustomCard data={AgreeNextEventdata} heading={'Upcomming Event'} RenderId={4} shadowColor={COLORS.green} />
+        <CommonCustomCard data={AgreeNextEventdata} heading={'Upcomming Event'} RenderId={4} shadowColor={CommonColor} />
       
     </View>
   )

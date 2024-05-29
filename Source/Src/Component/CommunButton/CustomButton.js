@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     fontFamily: Font.semibold,
-    left:50
+    left:58
   },
 });

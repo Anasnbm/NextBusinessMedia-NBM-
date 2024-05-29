@@ -18,6 +18,7 @@ const EventDetail = () => {
     ]);
   const route = useRoute()
   const { BgImage, City, Location, TexT, date, name, organizer, time, companey,CommonColor } = route.params
+  // console.log('bg',CommonColor)
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>

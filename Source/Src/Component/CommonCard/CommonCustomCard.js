@@ -83,7 +83,8 @@ const CommonCustomCard = ({ data, heading, RenderId, shadowColor }) => {
                     style={{ height: 20, width: 20, }} />
                   <Text>{item.City}</Text>
                   <TouchableOpacity style={[styles.btn, { shadowColor: shadowColor, backgroundColor: shadowColor }]}
-                    onPress={() => navigation.navigate('EventDetail', item)}>
+                    // onPress={() => navigation.navigate('EventDetail', item)}
+                    >
                     <Text style={[styles.normalText, { color: COLORS.white }]}>Join</Text>
                   </TouchableOpacity>
                 </View>

@@ -34,11 +34,12 @@ import NotificationScreen from '../Screens/Deshbord/SwipeableList';
 import CommonCustomCard from '../Component/CommonCard/CommonCustomCard';
 import EventDetail from '../Screens/Deshbord/EventDetail';
 import ViewPass from '../Screens/Events/ViewPass';
+import TestingScreen from '../TestingScreen';
 const Stack = createNativeStackNavigator();
 const Navigatior = ({screens}) => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='SpleshScreen1'>
+      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='Deshbord'>
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />
@@ -80,6 +81,7 @@ const Navigatior = ({screens}) => {
         <Stack.Screen name="ViewPass" component={ViewPass} />
         {/* terms -------------------------- */}
         <Stack.Screen name="TermAndConditon" component={TermAndConditon} />
+        <Stack.Screen name="TestingScreen" component={TestingScreen} />
    
         
       </Stack.Navigator>

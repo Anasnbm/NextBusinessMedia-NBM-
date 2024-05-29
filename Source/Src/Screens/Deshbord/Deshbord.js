@@ -6,13 +6,12 @@ import CustomHeader from '../../Component/Commonheader/CustomHeader';
 import CustomButton from '../../Component/CommunButton/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { DataContext } from '../../../../DataContext';
+
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-
 const Deshbord = () => {
-  const { data } = useContext(DataContext);
-  const [selectedId, setSelectedId] = useState(null);
+  const { data, selectedId, setSelectedId, getBgColor } = useContext(DataContext);
   const navigation = useNavigation();
 
   const renderItem = ({ item }) => {
@@ -20,8 +19,7 @@ const Deshbord = () => {
       <TouchableOpacity
         style={[
           styles.containerBox,
-          { marginRight: 16, marginBottom: 10 },
-          selectedId === item.id && { backgroundColor: COLORS.blue, borderColor: COLORS.white }
+          { marginRight: 16, marginBottom: 10, backgroundColor: item.id === selectedId ? getBgColor() : COLORS.white, borderColor: item.id === selectedId ? COLORS.white : COLORS.black }
         ]}
         onPress={() => setSelectedId(item.id)}
       >
@@ -29,10 +27,10 @@ const Deshbord = () => {
           source={item.Icon}
           style={[
             { height: Width * 0.075, width: Width * 0.075 },
-            selectedId === item.id && { tintColor: COLORS.white }
+            item.id === selectedId && { tintColor: COLORS.white }
           ]}
         />
-        <Text style={[styles.text, selectedId === item.id && { color: COLORS.white }]}>{item.text}</Text>
+        <Text style={[styles.text, item.id === selectedId && { color: COLORS.white }]}>{item.text}</Text>
       </TouchableOpacity>
     );
   }
@@ -40,12 +38,13 @@ const Deshbord = () => {
   const handleNext = async() => {
     if (selectedId !== null) {
       const selectedItem = data.find(item => item.id === selectedId);
-      if (selectedItem && selectedItem.screen) {
-        await AsyncStorage.setItem('selectedId', JSON.stringify(selectedId));
-        navigation.navigate(selectedItem.screen, { selectedId, bgColor: selectedItem.bgColor });
+      if (selectedItem && selectedItem.screens) {
+        navigation.navigate(selectedItem.screens.Navigation, { selectedId, bgColor: getBgColor() });
+        // console.log(selectedId)
       }
     }
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -64,15 +63,14 @@ const Deshbord = () => {
       />
       <CustomButton
         title={'Next'}
-        bgColor={selectedId !== null ? COLORS.blue : COLORS.white}
-        borderColor={selectedId !== null ? COLORS.blue : COLORS.black}
+        bgColor={selectedId !== null ? getBgColor() : COLORS.white}
+        borderColor={selectedId !== null ? getBgColor() : COLORS.black}
         textColor={selectedId !== null ? COLORS.white : COLORS.black}
         onPress={handleNext}
       />
     </SafeAreaView>
   );
 }
-
 
 export default Deshbord
 
@@ -81,7 +79,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     padding: 15,
-    
   },
   innerContainer: {
     flex: 1,
@@ -100,7 +97,6 @@ const styles = StyleSheet.create({
     padding: 22,
     borderRadius: 12,
     paddingHorizontal: 4.5,
-   
     gap: 10
   }
 })

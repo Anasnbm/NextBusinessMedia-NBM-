@@ -94,7 +94,6 @@ function App() {
       <StatusBar barStyle={'dark-content'} backgroundColor={'transparent'} translucent={true} />
       <DataProvider>
         <Navigatior />
-        {/* GLOBAL FLASH MESSAGE COMPONENT INSTANCE */}
         <FlashMessage position="top" />
       </DataProvider>
     </>

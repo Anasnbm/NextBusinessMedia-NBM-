@@ -13,7 +13,12 @@ export const COLORS = {
     secondry:'#58606A',
     placeHolderTextColor:'#D4D4D4',
     finext:'#D96f41',
-    transport:'#EB2326'
+    transport:'#3379AA',
+    propnext:'#00C9FF',
+    energyNext:'#1F8A5C',
+    africaNext:'#FD2B2A',
+    foodNext:'#81F306',
+    urbanPlanning:'#57E2E5'
     };
 
 export const Font = {

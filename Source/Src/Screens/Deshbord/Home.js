@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, TurboModuleRegistry, View, Image, TextInput, StatusBar } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { COLORS } from '../../Theme/Colors'
 import { fetchUsers } from '../../Api/FatchData'
 import SliderBox1 from '../../Component/CommonCard/SliderBox'
@@ -14,9 +14,11 @@ import { CompaneyData, Mediadata, data } from '../../Api/Data'
 import { TransportData, MediaPartnerTransport } from '../../Api/DataTransPort'
 import { attendiesData, speakerData } from '../../Api/FinextData'
 import CommonCustomCard from '../../Component/CommonCard/CommonCustomCard'
+import { DataContext } from '../../../../DataContext'
 
 export const FinextEventdata=[
   {
+    id:1,
     BgImage:require('../../../Assets/Images/GirlImage.png'),
     name:"Finext Conference Moracco 2024",
     date:'25-26 September, 2024',
@@ -29,6 +31,7 @@ export const FinextEventdata=[
     CommonColor:COLORS.finext
   },
   {
+    id:2,
     BgImage:require('../../../Assets/Images/GirlImage.png'),
     name:"Finext Conference Moracco 2024",
     date:'25-26 September, 2024',
@@ -43,6 +46,7 @@ export const FinextEventdata=[
 ]
 export const AgreeNextEventdata=[
   {
+    id:1,
     BgImage:require('../../../Assets/Images/GirlImage.png'),
     name:"AgriNext Conference Dubai 2024",
     date:'13-14 November 2024',
@@ -55,6 +59,7 @@ export const AgreeNextEventdata=[
     CommonColor:COLORS.green
   },
   {
+     id:2,
     BgImage:require('../../../Assets/Images/GirlImage.png'),
     name:"AgriNext Conference Dubai 2024",
     date:'13-14 November 2024',
@@ -73,6 +78,7 @@ export const AgreeNextEventdata=[
 const Home = () => {
   const [speakerdata, setSpeakerData] = useState('')
   const [showId, setShowId] = useState('')
+  const { selectedId } = useContext(DataContext);
   const navigation = useNavigation()
   useEffect(() => {
     const fetchData = async () => {
@@ -86,70 +92,49 @@ const Home = () => {
 
     fetchData();
   }, []);
-  useEffect(() => {
-    const getAsyncStorageData = async () => {
-      try {
-        const value = await AsyncStorage.getItem('selectedId');
-        if (value !== null) {
-          // Do something with the value, for example:
-          // console.log('Selected ID from AsyncStorage:', value);
-          setShowId(value)
-        }
-      } catch (error) {
-        console.error('Error retrieving data from AsyncStorage:', error);
-      }
-    };
-
-    getAsyncStorageData();
-  }, []);
+ 
 
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-
-      {showId === '1' ?
-        <>
-          {/* <SliderBox1 /> */}
-          <CommonCustomCard data={AgreeNextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.green} />
-          <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.green} />
-          <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.green} />
-          <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.green} />
-          <CommonCustomCard data={Mediadata} heading={'Media Partner'} RenderId={2} shadowColor={COLORS.green} />
-          <View style={{ marginBottom: 30 }}>
-            <CommonCustomCard data={CompaneyData} heading={'Companies Attending'} RenderId={2} shadowColor={COLORS.green} />
-          </View>
-        </>
-        : null}
-      {showId === '2' ?
-        <>
-          {/* <SliderBox1 /> */}
-          <CommonCustomCard data={FinextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.finext} />
-          <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.finext} />
-          <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.finext} />
-          <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.finext} />
-          <CommonCustomCard data={Mediadata} heading={'Media Partner'} RenderId={2} shadowColor={COLORS.finext} />
-          <View style={{ marginBottom: 30 }}>
+    {selectedId === 1 && (
+      <>
+        <CommonCustomCard data={AgreeNextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.green} />
+        <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.green} />
+        <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.green} />
+        <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.green} />
+        <CommonCustomCard data={Mediadata} heading={'Media Partner'} RenderId={2} shadowColor={COLORS.green} />
+        <View style={{ marginBottom: 30 }}>
+          <CommonCustomCard data={CompaneyData} heading={'Companies Attending'} RenderId={2} shadowColor={COLORS.green} />
+        </View>
+      </>
+    )}
+    {selectedId === 2 && (
+      <>
+        <CommonCustomCard data={FinextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.finext} />
+        <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.finext} />
+        <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.finext} />
+        <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.finext} />
+        <CommonCustomCard data={Mediadata} heading={'Media Partner'} RenderId={2} shadowColor={COLORS.finext} />
+        <View style={{ marginBottom: 30 }}>
           <CommonCustomCard data={CompaneyData} heading={'Companies Attending'} RenderId={2} shadowColor={COLORS.finext} />
-          </View>
-        </>
-        : null}
-      {
-        showId === '5' ?
-          <>
-            {/* <SliderBox1 /> */}
-            <CommonCustomCard data={data} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.transport} />
-          <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.transport} />
-          <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.transport} />
-          <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.transport} />
-          <CommonCustomCard data={Mediadata} heading={'Media Partner'} RenderId={2} shadowColor={COLORS.transport} />
-          <View style={{ marginBottom: 30 }}>
-            <CommonCustomCard data={CompaneyData} heading={'Companies Attending'} RenderId={2} shadowColor={COLORS.transport} />
-          </View>
-          </> : null
-      }
-
-    </ScrollView>
-  )
+        </View>
+      </>
+    )}
+    {selectedId === 5 && (
+      <>
+        <CommonCustomCard data={AgreeNextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.transport} />
+        <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.transport} />
+        <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.transport} />
+        <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.transport} />
+        <CommonCustomCard data={Mediadata} heading={'Media Partner'} RenderId={2} shadowColor={COLORS.transport} />
+        <View style={{ marginBottom: 30 }}>
+          <CommonCustomCard data={CompaneyData} heading={'Companies Attending'} RenderId={2} shadowColor={COLORS.transport} />
+        </View>
+      </>
+    )}
+  </ScrollView>
+);
 }
 
 export default Home

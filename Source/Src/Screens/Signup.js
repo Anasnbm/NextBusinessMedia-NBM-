@@ -10,6 +10,7 @@ import { COLORS, Font } from '../Theme/Colors';
 import { showMessage } from "react-native-flash-message";
 import { Switch } from 'react-native-paper';
 import CountryPickerComponent from '../Component/CommonTextInput/CountryPicker';
+import { SignupApi } from '../Api/Authentication';
 
 const SignupSchema = Yup.object().shape({
   fullName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
@@ -44,7 +45,7 @@ const Signup = () => {
   };
 
   const handleSignup = async (values, { resetForm }) => {
-    const url = 'http://3.77.200.124:3002/api/auth/register';
+    const url = SignupApi;
     try {
       const response = await axios.post(url, {
         name: values.fullName,
@@ -55,16 +56,10 @@ const Signup = () => {
         password: values.password,
       });
       console.log('Registration successful', response.data);
-  
-     
-  
-      try {
-        await navigation.navigate('Login'); // Navigate to the Login screen
+        await navigation.navigate('Login'); 
+        showMessageHandler(true);
         resetForm();
-      } catch (error) {
-        console.error('Error navigating to Login screen', error);
-        showMessageHandler(false);
-      }
+   
     } catch (error) {
       console.error('Error registering user', error.response ? error.response.data : error.message);
       showMessageHandler(false);
@@ -84,7 +79,7 @@ const Signup = () => {
         password: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={(values, { resetForm }) => handleSignup(values, resetForm)}
+      onSubmit={handleSignup} 
     >
       {({ errors, touched, values, handleChange, setFieldTouched, handleSubmit, isValid }) => (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>
@@ -179,7 +174,7 @@ const Signup = () => {
 
                 <View style={{ alignSelf: 'flex-start', marginTop: 15, flexDirection: 'row', justifyContent: "space-between" }}>
                   <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color={COLORS.blue} />
-                  <Text style={styles.texT}>By continuing, you agree to NBM's <Text style={styles.intrnalText} onPress={() => navigation.navigate('TermAndConditon')}>Terms and Privacy Policy</Text></Text>
+                  <Text style={[styles.texT,{width:'95%'}]}>By continuing, you agree to NBM's <Text style={styles.intrnalText} onPress={() => navigation.navigate('TermAndConditon')}>Terms and Privacy Policy</Text></Text>
                 </View>
 
                 <View style={{ width: '90%', alignSelf: 'center', marginTop: 20 }}>

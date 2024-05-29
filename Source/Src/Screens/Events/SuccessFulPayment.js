@@ -9,6 +9,8 @@ import { DataContext } from '../../../../DataContext';
 import { height, width } from 'react-native-dimension';
 const SuccessFulPayment = () => {
     const navigation = useNavigation()
+    const {selectedId,getBgColor} = useContext(DataContext);
+    const bgColor=getBgColor()
     return (
         <>
 
@@ -21,7 +23,7 @@ const SuccessFulPayment = () => {
                 {/* <Image source={require('../../../Assets/Images/Success.png')}
                 style={styles.Successimg} /> */}
                 <View style={{
-                    height: '50%', backgroundColor: '#EEEEEE', width: '80%', borderRadius: 5, shadowColor: COLORS.faint,
+                    height: '50%', backgroundColor: '#EEEEEE', width: '90%', borderRadius: 5, shadowColor: COLORS.faint,
                     shadowOffset: {
                         width: 0,
                         height: 7,
@@ -51,8 +53,8 @@ const SuccessFulPayment = () => {
                             }}
                         />
                         <Text style={{ color: 'grey' }}>
-                            - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                            - - - - - -
+                            -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                            - - - - - - - - - - 
                         </Text>
                         <View
                             style={{
@@ -84,12 +86,12 @@ const SuccessFulPayment = () => {
                         </View>
                     </View>
                 </View>
-                <View style={{ width: '80%' }}>
+                <View style={{ width: '90%' }}>
                     <CustomButton
-                        title={'View Pass'}
-                        bgColor={COLORS.blue}
+                        title={'Qr Code'}
+                        bgColor={bgColor}
                         textColor={COLORS.white}
-                        borderColor={COLORS.blue}
+                        borderColor={bgColor}
                         onPress={() => navigation.navigate('ViewPass')} />
                 </View>
             </SafeAreaView></>
