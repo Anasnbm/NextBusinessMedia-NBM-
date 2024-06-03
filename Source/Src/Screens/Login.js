@@ -11,6 +11,8 @@ import { COLORS, Font } from '../Theme/Colors';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { loginUser } from '../Api/Authentication'; // Import the loginUser function
 import { showMessage } from "react-native-flash-message";
+import { login } from '../../Redux/features/AuthSlice';
+import { useDispatch } from 'react-redux';
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(2, 'Too Short!').max(15, 'Too Long!').required('Required')
@@ -23,6 +25,7 @@ const Height = Dimensions.get('window').height;
 const Login = () => {
   const [userInfo, setUserInfo] = useState(null);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const showMessageHandler = (success) => {
     showMessage({
       message: success ? "User Login Successfully" : "User Not Registered",
@@ -55,22 +58,37 @@ const Login = () => {
       }
     }
   };
-
+  const handlingLogin = async (values) => {
+    const params = {
+      email: values.email,
+      password: values.password,
+    };
+    // console.log('params:', params);
+    try {
+      const response = await dispatch(login(params)).unwrap();
+      // console.log('Login successful', response);
+      navigation.navigate('Deshbord');
+      showMessageHandler(true);
+    } catch (error) {
+      console.error('Error logging in user', error);
+      showMessageHandler(false, error.message || 'An error occurred during login.');
+    }
+  };
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
       validationSchema={SignupSchema}
       onSubmit={async (values,) => {
-        try {
-          const response = await loginUser(values.email, values.password);
-          console.log('Login successful', response);
-          // Navigate to Dashboard on success
-          await navigation.navigate('Deshbord');
-          showMessageHandler(true);
-        } catch (error) {
-            console.error('Error registering user', error.response ? error.response.data : error.message);
-            showMessageHandler(false, error.response ? error.response.data.message : error.message);
-        } 
+        handlingLogin(values)
+        // try {
+        //   const response = await loginUser(values.email, values.password);
+        //   console.log('Login successful', response);
+        //    navigation.navigate('Deshbord');
+        //   showMessageHandler(true);
+        // } catch (error) {
+        //     console.error('Error registering user', error.response ? error.response.data : error.message);
+        //     showMessageHandler(false, error.response ? error.response.data.message : error.message);
+        // } 
       }}
     >
       {({ errors, touched, values, handleChange, setFieldTouched, handleSubmit, isValid, isSubmitting }) => (
@@ -117,8 +135,9 @@ const Login = () => {
                   bgColor={COLORS.blue}
                   textColor={COLORS.white}
                   borderColor={COLORS.blue}
+                  //  isLoading={true}
                   onPress={handleSubmit}
-                  disabled={isSubmitting || !isValid}
+                  // disabled={isSubmitting || !isValid}
                 />
               </View>
               <View style={styles.BottomContainer}>
@@ -128,7 +147,9 @@ const Login = () => {
                   <View style={styles.leftLine}></View>
                 </View>
                 <View style={[styles.line, { marginVertical: 20 }]}>
-                  <TouchableOpacity onPress={signIn}>
+                  <TouchableOpacity 
+                  // onPress={signIn}
+                  >
                     <Image source={require('../../Assets/Images/google.png')} style={styles.sociaImage} />
                   </TouchableOpacity>
                   <TouchableOpacity>

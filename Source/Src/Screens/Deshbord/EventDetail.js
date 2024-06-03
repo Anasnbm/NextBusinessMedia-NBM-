@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView, StatusBar, TouchableOpacity, Alert } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { COLORS, Font } from '../../Theme/Colors'
 import CustomHeader from '../../Component/Commonheader/CustomHeader'
 import CustomButton from '../../Component/CommunButton/CustomButton'
+import { DataContext } from '../../../../DataContext'
 
 const EventDetail = () => {
   const navigation = useNavigation()
@@ -17,9 +18,10 @@ const EventDetail = () => {
       {text: 'OK', onPress: () => console.log('OK Pressed')},
     ]);
   const route = useRoute()
-  const { BgImage, City, Location, TexT, date, name, organizer, time, companey,CommonColor } = route.params
-  // console.log('bg',CommonColor)
-
+  const { BgImage, City, Location, TexT, date, name, organizer, time, companey } = route.params
+   
+   const {selectedId,getBgColor} = useContext(DataContext);
+   const CommonColor=getBgColor()
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <ScrollView contentContainerStyle={{}}>

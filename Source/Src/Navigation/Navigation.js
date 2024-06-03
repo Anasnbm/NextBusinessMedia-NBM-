@@ -35,11 +35,16 @@ import CommonCustomCard from '../Component/CommonCard/CommonCustomCard';
 import EventDetail from '../Screens/Deshbord/EventDetail';
 import ViewPass from '../Screens/Events/ViewPass';
 import TestingScreen from '../TestingScreen';
+import { useSelector } from 'react-redux';
+
 const Stack = createNativeStackNavigator();
+
 const Navigatior = ({screens}) => {
+  const {userData}=useSelector(state=>state.auth)
+  console.log('navigationUser',userData)
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='Deshbord'>
+      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName={userData ? "Deshbord":"SpleshScreen1"}>
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />

@@ -1,15 +1,16 @@
-import { StyleSheet, Text, TouchableOpacity,View,Image } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity,View,Image,ActivityIndicator } from 'react-native';
 import React from 'react';
 import { COLORS, Font } from '../../Theme/Colors';
 
 
-const CustomButton = ({ title, onPress, bgColor, textColor ,borderColor}) => {
+const CustomButton = ({ title, onPress, bgColor, textColor ,borderColor,isLoading}) => {
   return (
     <TouchableOpacity
       style={[styles.buttonStyle, { backgroundColor: bgColor ,borderColor:borderColor}]}
       onPress={onPress}
     >
       <Text style={[styles.textStyle, { color: textColor || COLORS.white }]}>{title}</Text>
+      {isLoading && <ActivityIndicator size="small" color={'white'} />}
       <View style={{height:40,width:40,backgroundColor:COLORS.white,borderRadius:30,alignItems:'center',justifyContent:'center'}}>
          <Image source={require('../../../Assets/Images/rightIcon.png')}
          style={{height:23,width:23}}/>

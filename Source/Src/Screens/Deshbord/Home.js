@@ -78,7 +78,9 @@ export const AgreeNextEventdata=[
 const Home = () => {
   const [speakerdata, setSpeakerData] = useState('')
   const [showId, setShowId] = useState('')
-  const { selectedId } = useContext(DataContext);
+  const {selectedId,getBgColor} = useContext(DataContext);
+  const bgColor=getBgColor()
+  console.log('jamshef',bgColor)
   const navigation = useNavigation()
   useEffect(() => {
     const fetchData = async () => {
@@ -123,7 +125,7 @@ const Home = () => {
     )}
     {selectedId === 5 && (
       <>
-        <CommonCustomCard data={AgreeNextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.transport} />
+         <CommonCustomCard data={FinextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.transport} />
         <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.transport} />
         <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.transport} />
         <CommonCustomCard data={speakerData} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.transport} />

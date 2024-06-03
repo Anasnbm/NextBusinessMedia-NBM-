@@ -1,48 +1,71 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import axios from 'axios';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useState} from 'react';
 
-const Test = () => {
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from '../Redux/features/AuthSlice';
+import MyButton from './Component/CommunButton/MyButton';
+const Login = () => {
+  // states
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-const registerUser = async (userData) => {
-  const url = 'http://3.77.200.124:3002/api/auth/register';
-  try {
-    const response = await axios.post(url, userData);
-    console.log('Registration successful', response.data);
-    return response.data;
-    // console.log(response)
-  } catch (error) {
-    console.error('Error registering user', error.response ? error.response.data : error.message);
-    throw error;
-  }
-};
+  // hooks
+  const dispatch = useDispatch();
+  const {userData, isLoading} = useSelector(state => state.auth);
 
-const userData = {
-  name: 'John Doe',
-  email: 'john.doe@example.com',
-  company: 'Example Inc.',
-  personal_phone: '1234567890',
-  company_phone: '0987654321',
-  password: 'password123'
-};
-
-registerUser(userData)
-  .then(data => {
-    // Handle successful registration
-    console.log('User registered:', data);
-  })
-  .catch(error => {
-    // Handle registration error
-    console.error('Registration error:', error);
-  });
-
+  // functions
+  const handlingLogin = () => {
+    const params = {
+      email: email,
+      password: password,
+    };
+    console.log('params:', params);
+    dispatch(login(params));
+  };
   return (
-    <View>
-      <Text>Test</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Login</Text>
+      <TextInput
+        value={email}
+        placeholder="Enter Email"
+        onChangeText={setEmail}
+        style={styles.input}
+        placeholderTextColor="grey"
+        autoCapitalize="none"
+      />
+      <TextInput
+        value={password}
+        placeholder="Enter Password"
+        onChangeText={setPassword}
+        style={styles.input}
+        placeholderTextColor="grey"
+      />
+      
+      <MyButton isLoading={isLoading} title="Login" onPress={handlingLogin} />
     </View>
-  )
-}
+  );
+};
 
-export default Test
+export default Login;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    gap: 20,
+    paddingTop: 150,
+    paddingHorizontal: '5%',
+  },
+  title: {
+    fontSize: 36,
+    color: '#000',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  input: {
+    height: 45,
+    borderWidth: 1,
+    borderRadius: 25,
+    borderColor: 'coral',
+    paddingHorizontal: 20,
+  },
+});

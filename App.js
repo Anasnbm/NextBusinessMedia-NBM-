@@ -11,8 +11,10 @@ import messaging from '@react-native-firebase/messaging';
 import { PermissionsAndroid } from 'react-native';
 import FlashMessage from "react-native-flash-message";
 import { DataProvider } from './DataContext';
+import { Provider } from 'react-redux';
+import { persistor, store } from './Source/Redux/store';
 const Stack = createNativeStackNavigator();
-
+import { PersistGate } from 'redux-persist/integration/react'
 function App() {
 
   // useEffect(() => {
@@ -92,10 +94,14 @@ function App() {
   return (
     <>
       <StatusBar barStyle={'dark-content'} backgroundColor={'transparent'} translucent={true} />
-      <DataProvider>
-        <Navigatior />
-        <FlashMessage position="top" />
-      </DataProvider>
+      <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <DataProvider>
+          <Navigatior />
+          <FlashMessage position="top" />
+        </DataProvider>
+        </PersistGate>
+      </Provider>
     </>
   );
 }

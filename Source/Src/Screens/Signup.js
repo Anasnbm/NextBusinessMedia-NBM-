@@ -44,9 +44,16 @@ const Signup = () => {
     });
   };
 
-  const handleSignup = async (values, { resetForm }) => {
+
+  const handleSignup = async (values) => {
     const url = SignupApi;
     try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      };
+  
       const response = await axios.post(url, {
         name: values.fullName,
         email: values.email,
@@ -54,15 +61,20 @@ const Signup = () => {
         personal_phone: values.phone,
         company_phone: values.Companey_phone,
         password: values.password,
-      });
-      console.log('Registration successful', response.data);
-        await navigation.navigate('Login'); 
-        showMessageHandler(true);
-        resetForm();
-   
+      }, config);
+  
+      console.log('Registration successful', response);
+  
+      if (response.data.message != "User already exists") {
+        navigation.navigate('Login')
+        showMessageHandler(true)
+        // Alert.alert('Success', 'SignUp Successfully!');
+      }
+  
     } catch (error) {
       console.error('Error registering user', error.response ? error.response.data : error.message);
-      showMessageHandler(false);
+      // Alert.alert('Error', 'Error Mil rha h');
+      showMessageHandler(false)
     }
   };
   
@@ -79,7 +91,12 @@ const Signup = () => {
         password: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={handleSignup} 
+      onSubmit={(values, { resetForm }) => {
+        handleSignup(values)
+        resetForm();
+      }}
+       
+      
     >
       {({ errors, touched, values, handleChange, setFieldTouched, handleSubmit, isValid }) => (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={'padding'}>

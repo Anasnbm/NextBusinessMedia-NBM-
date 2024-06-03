@@ -43,27 +43,10 @@ const data=[
 const EventList = () => {
   const navigation=useNavigation()
   const { getBgColor, setSelectedId } = useContext(DataContext);
-  const [getId, setgetId] = useState('');
+ 
   const CommonColor = getBgColor();
 
-  // console.log('bgColor:', bgColor);
 
-  useEffect(() => {
-    const getAsyncStorageData = async () => {
-      try {
-        const value = await AsyncStorage.getItem('selectedId');
-        if (value !== null) {
-          // console.log('Selected ID from AsyncStorage:', value);
-          setgetId(value);
-          setSelectedId(Number(value)); // Set the selectedId in the context
-        }
-      } catch (error) {
-        console.error('Error retrieving data from AsyncStorage:', error);
-      }
-    };
-
-    getAsyncStorageData();
-  }, []);
   const renderItem=({item,index})=>{
     return(
       <TouchableOpacity style={styles.Box} activeOpacity={0.5}
