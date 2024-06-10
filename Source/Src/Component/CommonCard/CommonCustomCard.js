@@ -1,18 +1,20 @@
 import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { COLORS, Font } from '../../../Src/Theme/Colors'
 import { useNavigation } from '@react-navigation/native'
+import { DataContext } from '../../../../DataContext'
 
-const CommonCustomCard = ({ data, heading, RenderId, shadowColor }) => {
-
-
+const CommonCustomCard = ({ data, heading, RenderId,}) => {
+  const {selectedId,getBgColor} = useContext(DataContext);
+ const shadowColor=getBgColor()
+console.log(shadowColor)
   const navigation = useNavigation()
   const renderItem = ({ item }) => {
     if (RenderId === 1) {
       return (
-        <View style={{ height: 170, width: 330, alignItems: 'center', justifyContent: 'center',marginRight:10 }}>
+        <View style={{ height: 170, width: 347, alignItems: 'center', justifyContent: 'center',marginRight:10 }}>
           <View style={[styles.container1, { padding: 5, flexDirection: "row",  shadowColor: shadowColor,gap: 20, }]}>
-            <Image source={require('../../../Assets/Images/GirlImage.png')}
+            <Image source={{uri:item.BgImage}}
               style={{ height: 135, width: 110, borderRadius: 10 }} />
             <View>
 
@@ -37,7 +39,7 @@ const CommonCustomCard = ({ data, heading, RenderId, shadowColor }) => {
     if (RenderId === 2) {
       return (
         <View style={styles.UpperContainer}>
-          <TouchableOpacity style={[styles.box, { shadowColor: shadowColor, }]}
+          <TouchableOpacity style={[styles.box, { shadowColor: shadowColor,  }]}
             onPress={() => navigation.navigate('DetailsInformation', { data: item })}>
             <Image source={{ uri: item.image2 }} style={styles.BoxImage} />
             <View style={styles.BoxBottom}>
@@ -157,13 +159,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: Font.regular,
     fontWeight: '700',
-    color: COLORS.black,
+    color:COLORS.black,
     textAlign: 'center',
 
   },
   normalText: {
     fontSize: 12,
-    color: COLORS.black,
+  color:COLORS.black,
     fontFamily: Font.regular,
     fontWeight: '500',
     textAlign: 'center',
@@ -174,7 +176,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 16,
-    color: COLORS.green
+ 
 
   },
   Heading: {

@@ -21,6 +21,8 @@ import EventList from '../Events/EventList';
 import QRScanner from '../Events/QrCodeScanner';
 import SignOut from '../SignOut';
 
+import GetLocation from 'react-native-get-location'
+import axios from 'axios';
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -28,9 +30,45 @@ function EmptyScreen() {
   return <View />;
 }
 
+
+
 const HomeHeader = ({ navigation, bgColor }) => {
   // console.log('======',bgColor)
   const [text, setText] = useState('');
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [locationName, setLocationName] = useState('');
+
+
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        const location = await GetLocation.getCurrentPosition({
+          enableHighAccuracy: true,
+          timeout: 10000,
+        });
+        // console.log(location);
+        const { latitude, longitude } = location;
+        // console.log('Location', location);
+        setCurrentLocation(location);
+
+        // Reverse geocode the latitude and longitude to get the location name
+        const response = await axios.get(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`
+        );
+        const city = response.data.address.city || response.data.address.town || response.data.address.village || 'Location not found';
+        // setLocationName(city);
+        // console.log('Location data------',response.data.address)
+        setLocationName(`${response.data.address.city} ${response.data.address.postcode}`);
+
+      } catch (error) {
+        setLocationName('Error getting city name');
+        console.error(error);
+      }
+    };
+
+    fetchLocation();
+  }, []);
+
 
   return (
     <View style={{backgroundColor: COLORS.white}}>
@@ -45,7 +83,7 @@ const HomeHeader = ({ navigation, bgColor }) => {
           </TouchableOpacity>
           <View style={{marginTop: 10, alignItems: 'center'}}>
             <Text style={styles.teXT}>Current Location</Text>
-            <Text style={styles.teXT}>Noida Sec 16</Text>
+            <Text style={styles.teXT}>{locationName}</Text>
           </View>
           <TouchableOpacity>
             <Image

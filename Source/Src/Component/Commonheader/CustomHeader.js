@@ -5,9 +5,9 @@ import { COLORS, Font } from '../../Theme/Colors';
 const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
-const CustomHeader = ({ title, left, right,back,OnPress,textcolor }) => {
+const CustomHeader = ({ title, left, right,back,OnPress,textcolor,bgColor }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{backgroundColor:bgColor}]}>
       <View style={styles.leftContainer}>
       {left && (
           <TouchableOpacity style={[styles.iconContainer,]}  onPress={OnPress}>

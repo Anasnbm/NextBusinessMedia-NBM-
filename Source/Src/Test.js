@@ -1,71 +1,151 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+import { COLORS } from './Theme/Colors';
+import CustomHeader from './Component/Commonheader/CustomHeader';
+import { useNavigation } from '@react-navigation/native';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {login} from '../Redux/features/AuthSlice';
-import MyButton from './Component/CommunButton/MyButton';
-const Login = () => {
-  // states
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  // hooks
-  const dispatch = useDispatch();
-  const {userData, isLoading} = useSelector(state => state.auth);
-
-  // functions
-  const handlingLogin = () => {
-    const params = {
-      email: email,
-      password: password,
-    };
-    console.log('params:', params);
-    dispatch(login(params));
+const Test = () => {
+  const [selected, setSelected] = useState('');
+  const [eventDetails, setEventDetails] = useState([]);
+const navigation=useNavigation()
+  const events = {
+    '2024-06-03': [
+      { name: 'Event 1', color: 'red' },
+      { name: 'Event 2', color: 'yellow' },
+    ],
+    '2024-06-04': [{ name: 'Event 3', color: 'green' }],
+    '2024-06-05': [
+      { name: 'Event 4', color: 'blue' },
+      { name: 'Event 5', color: 'purple' },
+      { name: 'Event 6', color: 'orange' },
+    ],
   };
+
+  const dot_marking = {
+    '2024-06-03': { dotColor: 'red', marked: true },
+    '2024-06-04': { dotColor: 'green', marked: true },
+    '2024-06-05': { dotColor: 'blue', marked: true },
+  };
+
+  const periodMarking = {
+    '2024-06-03': {
+      startingDay: true,
+      color: '#FF9999',
+      textColor: 'white',
+    },
+    '2024-06-04': {
+      color: '#FF9999',
+    },
+    '2024-06-05': {
+      endingDay: true,
+      color: '#FF9999',
+      textColor: 'white',
+    },
+  };
+
+  const custom_marking = {
+    '2024-06-03': {
+      customStyles: {
+        container: {
+          backgroundColor: 'red',
+        },
+        text: {
+          color: 'white',
+        },
+      },
+    },
+    '2024-06-04': {
+      customStyles: {
+        container: {
+          backgroundColor: 'green',
+        },
+        text: {
+          color: 'white',
+        },
+      },
+    },
+    '2024-06-05': {
+      customStyles: {
+        container: {
+          backgroundColor: 'blue',
+        },
+        text: {
+          color: 'white',
+        },
+      },
+    },
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
-      <TextInput
-        value={email}
-        placeholder="Enter Email"
-        onChangeText={setEmail}
-        style={styles.input}
-        placeholderTextColor="grey"
-        autoCapitalize="none"
+    <View style={{flex:1,backgroundColor:COLORS.white,padding:15,}}>
+      <View style={{marginTop:20}}>
+
+    
+      <CustomHeader back={true} left={true} OnPress={()=>navigation.goBack()}/>
+      <Calendar
+        onDayPress={(day) => {
+          setSelected(day.dateString);
+          setEventDetails(events[day.dateString] || []);
+        }}
+        markedDates={{
+          [selected]: {
+            selected: true,
+            disableTouchEvent: true,
+            selectedDotColor: 'orange',
+            selectedBackgroundColor: 'purple',
+          },
+          ...dot_marking,
+          ...periodMarking,
+          ...custom_marking,
+        }}
+        theme={{
+          selectedDayBackgroundColor: 'purple',
+          selectedDayTextColor: 'white',
+        }}
+        periodMarking={periodMarking}
+        customMarkingType="period"
       />
-      <TextInput
-        value={password}
-        placeholder="Enter Password"
-        onChangeText={setPassword}
-        style={styles.input}
-        placeholderTextColor="grey"
-      />
-      
-      <MyButton isLoading={isLoading} title="Login" onPress={handlingLogin} />
+      {eventDetails.length > 0 && (
+        <View style={{ marginTop: 20, alignItems: 'center' }}>
+          {eventDetails.map((event, index) => (
+            <View
+              key={index}
+              style={[
+                styles.eventContainer,
+                { backgroundColor: event.color },
+              ]}
+            >
+              <Text style={styles.eventText}>{event.name}</Text>
+            </View>
+          ))}
+        </View>
+      )}
+        </View>
     </View>
   );
 };
 
-export default Login;
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    gap: 20,
-    paddingTop: 150,
-    paddingHorizontal: '5%',
+  eventContainer: {
+    marginVertical: 5,
+    padding: 10,
+    borderRadius: 5,
+    width:'100%',
+    alignItems:'center'
   },
-  title: {
-    fontSize: 36,
-    color: '#000',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  input: {
-    height: 45,
-    borderWidth: 1,
-    borderRadius: 25,
-    borderColor: 'coral',
-    paddingHorizontal: 20,
+  eventText: {
+    color: 'white',
+    fontSize: 16,
   },
 });
+
+export default Test;
+
+
+
+
+
+
+
+

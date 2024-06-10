@@ -41,10 +41,11 @@ const Stack = createNativeStackNavigator();
 
 const Navigatior = ({screens}) => {
   const {userData}=useSelector(state=>state.auth)
-  console.log('navigationUser',userData)
+  // console.log('navigationUser',userData)
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName={userData ? "Deshbord":"SpleshScreen1"}>
+      {/* <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='Test'> */}
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />

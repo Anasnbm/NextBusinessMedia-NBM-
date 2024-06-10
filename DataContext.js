@@ -11,6 +11,8 @@ export const DataProvider = ({ children }) => {
       id: 1,
       Icon: require('./Source/Assets/Images/AgreeCon.png'),
       text: 'AgriTech',
+      Location:'Crowne Plaza Dubai',
+      DateTime:'13-14 November 2024',
       screens: {
         MainDeshbord: COLORS.green,
         Navigation:'MainDeshbord'
@@ -20,6 +22,8 @@ export const DataProvider = ({ children }) => {
       id: 2,
       Icon: require('./Source/Assets/Images/finext.png'),
       text: 'FinTech',
+      Location:'Morocco',
+      DateTime:'25-26 September 2024',
       screens: {
         MainDeshbord: COLORS.finext,
        Navigation:'MainDeshbord'
@@ -27,35 +31,44 @@ export const DataProvider = ({ children }) => {
     },
     {
       id: 3,
-      Icon: require('./Source/Assets/Images/CityNextExpicon.png'),
-      text: 'PropTech',
+      Icon: require('./Source/Assets/Images/EnergyEvolutionicon.png'),
+      text: 'EnergyNext',
+      Location:'Madrid,Spain',
+      DateTime:'13-15 March 2025',
       screens: {
-        MainDeshbord: COLORS.propnext,
-        Navigation:'TestingScreen'
+        MainDeshbord: COLORS.energyNext,
+        Navigation:'MainDeshbord'
       }
     },
     {
       id: 4,
-      Icon: require('./Source/Assets/Images/AICIcon.png'),
-      text: 'AfricaIT',
-      screens: {
-        MainDeshbord: COLORS.africaNext,
-        Navigation:'TestingScreen'
-      }
-    },
-    {
-      id: 5,
       Icon: require('./Source/Assets/Images/TransportNexicon.png'),
-      text: 'Transport & \n Logistic',
+      text: 'Transport & Logistic',
+      Location:'Singapore',
+      DateTime:'10-11 October',
       screens: {
         MainDeshbord: COLORS.transport,
         Navigation:'MainDeshbord'
       }
     },
+   
+    {
+      id: 5,
+      Icon: require('./Source/Assets/Images/AICIcon.png'),
+      text: 'AfricaIT',
+      DateTime:'comming soon',
+  
+      screens: {
+        MainDeshbord: COLORS.africaNext,
+        Navigation:'TestingScreen'
+      }
+    },
+   
     {
       id: 6,
       Icon: require('./Source/Assets/Images/CityNextExpicon.png'),
       text: 'Urban Planning',
+      DateTime:'comming soon',
       screens: {
         MainDeshbord: COLORS.urbanPlanning,
         Navigation:'TestingScreen'
@@ -64,17 +77,20 @@ export const DataProvider = ({ children }) => {
     },
     {
       id: 7,
-      Icon: require('./Source/Assets/Images/EnergyEvolutionicon.png'),
-      text: 'EnergyNext',
+      Icon: require('./Source/Assets/Images/CityNextExpicon.png'),
+      text: 'PropTech',
+      DateTime:'comming soon',
       screens: {
-        MainDeshbord: COLORS.energyNext,
+        MainDeshbord: COLORS.propnext,
         Navigation:'TestingScreen'
       }
     },
+    
     {
       id: 8,
       Icon: require('./Source/Assets/Images/FoodNextIcon.png'),
       text: 'FoodNext',
+      DateTime:'comming soon',
       screens: {
         MainDeshbord: COLORS.foodNext,
         Navigation:'TestingScreen'

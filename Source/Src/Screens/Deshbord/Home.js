@@ -15,11 +15,12 @@ import { TransportData, MediaPartnerTransport } from '../../Api/DataTransPort'
 import { attendiesData, speakerData } from '../../Api/FinextData'
 import CommonCustomCard from '../../Component/CommonCard/CommonCustomCard'
 import { DataContext } from '../../../../DataContext'
+import { EnergyData, Energyspeaker } from '../../Api/EnergyNextData/Energynextdata'
 
 export const FinextEventdata=[
   {
     id:1,
-    BgImage:require('../../../Assets/Images/GirlImage.png'),
+    BgImage:'https://agrinextcon.com/wp-content/uploads/2024/05/IMG_8827-scaled-1-2048x1366-min-1536x1025.jpg',
     name:"Finext Conference Moracco 2024",
     date:'25-26 September, 2024',
     time:'09:00 AM TO 6:00 PM',
@@ -28,11 +29,16 @@ export const FinextEventdata=[
     organizer:'Internetshine Technologies',
     TexT:'FiNext Conference is owned and supported by InternetShine Corp, USA. The conference was created to provide a digital hub and meeting place for the global financial sector, allowing tech start-ups, SMEs, incumbent tech providers, investors, institutions, and other stakeholders to connect and interact under one roof',
     companey:'organizer',
-    CommonColor:COLORS.finext
+    CommonColor:COLORS.finext,
+    Description: "Jim Marous, a visionary entrepreneur with a unique mix of experience combining business savvy with agriculture to provide closed-loop systems for sustainable supply chains and chemical-free production. Radi established a farm focused on raising high-quality livestock using sustainable practices which now nourishes a community seeking wholesome, all-natural products – Radi Farms. In addition, he has joined Mozare3 – the leading Agri-fintech startup in Cairo, Egypt as Chief Operations Officer to advance agriculture operations and food processing to introduce high-quality local production for different buyers and better income & employment opportunities for the agriculture sector. Radi is keen on supporting technology adoption and financial inclusion across the supply chain to enhance farmers’ experience and their income.",
+    webSite: 'https://radifarms.com/',
+    email: 'khaled@radifarms.com',
+    Linkdin: 'https://www.linkedin.com/company/agrinextcon/',
+    userName: 'Jim Marous',
   },
   {
     id:2,
-    BgImage:require('../../../Assets/Images/GirlImage.png'),
+    BgImage:'https://agrinextcon.com/wp-content/uploads/2024/05/IMG_8827-scaled-1-2048x1366-min-1536x1025.jpg',
     name:"Finext Conference Moracco 2024",
     date:'25-26 September, 2024',
     time:'09:00 AM TO 6:00 PM',
@@ -41,13 +47,18 @@ export const FinextEventdata=[
     organizer:'Internetshine Technologies',
     TexT:'FiNext Conference is owned and supported by InternetShine Corp, USA. The conference was created to provide a digital hub and meeting place for the global financial sector, allowing tech start-ups, SMEs, incumbent tech providers, investors, institutions, and other stakeholders to connect and interact under one roof',
     companey:'organizer',
-    CommonColor:COLORS.finext
+    CommonColor:COLORS.finext,
+    Description: "Jim Marous, a visionary entrepreneur with a unique mix of experience combining business savvy with agriculture to provide closed-loop systems for sustainable supply chains and chemical-free production. Radi established a farm focused on raising high-quality livestock using sustainable practices which now nourishes a community seeking wholesome, all-natural products – Radi Farms. In addition, he has joined Mozare3 – the leading Agri-fintech startup in Cairo, Egypt as Chief Operations Officer to advance agriculture operations and food processing to introduce high-quality local production for different buyers and better income & employment opportunities for the agriculture sector. Radi is keen on supporting technology adoption and financial inclusion across the supply chain to enhance farmers’ experience and their income.",
+    webSite: 'https://radifarms.com/',
+    email: 'khaled@radifarms.com',
+    Linkdin: 'https://www.linkedin.com/company/agrinextcon/',
+    userName: 'Jim Marous',
   },
 ]
 export const AgreeNextEventdata=[
   {
     id:1,
-    BgImage:require('../../../Assets/Images/GirlImage.png'),
+    BgImage:'https://agrinextcon.com/wp-content/uploads/2024/05/IMG_8827-scaled-1-2048x1366-min-1536x1025.jpg',
     name:"AgriNext Conference Dubai 2024",
     date:'13-14 November 2024',
     time:'09:00 AM TO 6:00 PM',
@@ -56,11 +67,16 @@ export const AgreeNextEventdata=[
     organizer:'Internetshine Technologies',
     TexT:'FiNext Conference is owned and supported by InternetShine Corp, USA. The conference was created to provide a digital hub and meeting place for the global financial sector, allowing tech start-ups, SMEs, incumbent tech providers, investors, institutions, and other stakeholders to connect and interact under one roof',
     companey:'organizer',
-    CommonColor:COLORS.green
+    CommonColor:COLORS.green,
+    Description: "Jim Marous, a visionary entrepreneur with a unique mix of experience combining business savvy with agriculture to provide closed-loop systems for sustainable supply chains and chemical-free production. Radi established a farm focused on raising high-quality livestock using sustainable practices which now nourishes a community seeking wholesome, all-natural products – Radi Farms. In addition, he has joined Mozare3 – the leading Agri-fintech startup in Cairo, Egypt as Chief Operations Officer to advance agriculture operations and food processing to introduce high-quality local production for different buyers and better income & employment opportunities for the agriculture sector. Radi is keen on supporting technology adoption and financial inclusion across the supply chain to enhance farmers’ experience and their income.",
+    webSite: 'https://radifarms.com/',
+    email: 'khaled@radifarms.com',
+    Linkdin: 'https://www.linkedin.com/company/agrinextcon/',
+    userName: 'Jim Marous',
   },
   {
      id:2,
-    BgImage:require('../../../Assets/Images/GirlImage.png'),
+     BgImage:'https://agrinextcon.com/wp-content/uploads/2024/05/IMG_8827-scaled-1-2048x1366-min-1536x1025.jpg',
     name:"AgriNext Conference Dubai 2024",
     date:'13-14 November 2024',
     time:'09:00 AM TO 6:00 PM',
@@ -69,7 +85,12 @@ export const AgreeNextEventdata=[
     organizer:'Internetshine Technologies',
     TexT:'FiNext Conference is owned and supported by InternetShine Corp, USA. The conference was created to provide a digital hub and meeting place for the global financial sector, allowing tech start-ups, SMEs, incumbent tech providers, investors, institutions, and other stakeholders to connect and interact under one roof',
     companey:'organizer',
-    CommonColor:COLORS.green
+    CommonColor:COLORS.green,
+       Description: "Jim Marous, a visionary entrepreneur with a unique mix of experience combining business savvy with agriculture to provide closed-loop systems for sustainable supply chains and chemical-free production. Radi established a farm focused on raising high-quality livestock using sustainable practices which now nourishes a community seeking wholesome, all-natural products – Radi Farms. In addition, he has joined Mozare3 – the leading Agri-fintech startup in Cairo, Egypt as Chief Operations Officer to advance agriculture operations and food processing to introduce high-quality local production for different buyers and better income & employment opportunities for the agriculture sector. Radi is keen on supporting technology adoption and financial inclusion across the supply chain to enhance farmers’ experience and their income.",
+        webSite: 'https://radifarms.com/',
+        email: 'khaled@radifarms.com',
+        Linkdin: 'https://www.linkedin.com/company/agrinextcon/',
+        userName: 'Jim Marous',
   },
 ]
 
@@ -80,7 +101,7 @@ const Home = () => {
   const [showId, setShowId] = useState('')
   const {selectedId,getBgColor} = useContext(DataContext);
   const bgColor=getBgColor()
-  console.log('jamshef',bgColor)
+  // console.log('jamshef',bgColor)
   const navigation = useNavigation()
   useEffect(() => {
     const fetchData = async () => {
@@ -123,7 +144,19 @@ const Home = () => {
         </View>
       </>
     )}
-    {selectedId === 5 && (
+    {selectedId === 3 && (
+      <>
+         <CommonCustomCard data={EnergyData} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.transport} />
+        <CommonCustomCard data={Energyspeaker} RenderId={2} heading={'Speakers'} shadowColor={COLORS.transport} />
+        <CommonCustomCard data={data} RenderId={2} heading={'Attendees'} shadowColor={COLORS.transport} />
+        <CommonCustomCard data={Energyspeaker} heading={'Exhibitor'} RenderId={3} shadowColor={COLORS.transport} />
+        <CommonCustomCard data={Mediadata} heading={'Media Partner'} RenderId={2} shadowColor={COLORS.transport} />
+        <View style={{ marginBottom: 30 }}>
+          <CommonCustomCard data={CompaneyData} heading={'Companies Attending'} RenderId={2} shadowColor={COLORS.transport} />
+        </View>
+      </>
+    )}
+     {selectedId === 5 && (
       <>
          <CommonCustomCard data={FinextEventdata} heading={'Event Detail'} RenderId={1} shadowColor={COLORS.transport} />
         <CommonCustomCard data={speakerData} RenderId={2} heading={'Speakers'} shadowColor={COLORS.transport} />

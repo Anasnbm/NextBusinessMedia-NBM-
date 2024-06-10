@@ -26,11 +26,13 @@ const Deshbord = () => {
         <Image
           source={item.Icon}
           style={[
-            { height: Width * 0.075, width: Width * 0.075 },
+            { height: Width * 0.20, width: Width * 0.20,},
             item.id === selectedId && { tintColor: COLORS.white }
           ]}
         />
         <Text style={[styles.text, item.id === selectedId && { color: COLORS.white }]}>{item.text}</Text>
+        <Text style={[styles.text1, item.id === selectedId && { color: COLORS.white }]}>{item.DateTime}</Text>
+        <Text style={[styles.text1, item.id === selectedId && { color: COLORS.white }]}>{item.Location}</Text>
       </TouchableOpacity>
     );
   }
@@ -83,6 +85,12 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
   },
+  text1: {
+    fontSize: 12,
+    color: 'black',
+    fontFamily: Font.regular,
+    fontWeight: 'bold'
+  },
   text: {
     fontSize: 16,
     color: 'black',
@@ -90,13 +98,23 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   containerBox: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     alignItems: 'center',
     width: '47%',
-    borderWidth: 1,
+    // borderWidth: 0.1,
     padding: 22,
     borderRadius: 12,
     paddingHorizontal: 4.5,
-    gap: 10
+    gap: 10,
+    height:200,
+    shadowColor: COLORS.blue,
+shadowOffset: {
+	width: 0,
+	height: 2,
+},
+shadowOpacity: 0.25,
+shadowRadius: 3.84,
+
+elevation: 5,
   }
 })

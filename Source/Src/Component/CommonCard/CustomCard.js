@@ -20,7 +20,7 @@ const Width = Dimensions.get('window').width;
 const Height = Dimensions.get('window').height;
 
 const CustomCard = ({ data, heading, RenderId, shadowColors}) => {
-  // console.log('colors',shadowColors)
+   console.log('colors',shadowColors)
   // console.log('first',RenderId)
   const [selectTabe, setselectTabe] = useState(0)
   const [showAll, setShowAll] = useState(false);
