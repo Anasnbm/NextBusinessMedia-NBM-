@@ -1,3 +1,5 @@
+import axios from "axios"
+
 export const attendiesData = [
     {
         id: 1,
@@ -235,3 +237,11 @@ export const speakerData = [
         Linkdin: 'https://www.linkedin.com/company/agrinextcon/',
     },
 ]
+ export const ApiData=async()=>{
+     try {
+        const res=await axios.get('')
+        
+    } catch (error) {
+        
+    }
+ }

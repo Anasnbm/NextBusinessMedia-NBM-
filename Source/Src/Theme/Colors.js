@@ -7,7 +7,7 @@ export const COLORS = {
     red:'#FF0000',
     green:'#639900',
     primery:'#FFF0C9',
-
+  textSecondery:'#505780',
     faint:'#9e9e9e',
     primeryBlue:'#265FB1',
     secondry:'#58606A',

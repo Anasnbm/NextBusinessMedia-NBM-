@@ -41,11 +41,11 @@ const Stack = createNativeStackNavigator();
 
 const Navigatior = ({screens}) => {
   const {userData}=useSelector(state=>state.auth)
-  // console.log('navigationUser',userData)
+  // console.log('navigationUser',userData.token)
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName={userData ? "Deshbord":"SpleshScreen1"}>
-      {/* <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='Test'> */}
+      {/* <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName={userData ? "Deshbord":"SpleshScreen1"}> */}
+      <Stack.Navigator screenOptions={{headerShown:false,}} initialRouteName='Test'>
        
         {/* ******************************* Splesh Screen ******************************************** */}
         <Stack.Screen name="SpleshScreen1" component={SpleshScreen1} />
@@ -80,12 +80,12 @@ const Navigatior = ({screens}) => {
 
 
        
-        {/* -------------------------Test Purpose---------------------- */}
+        {/* ------------------------- Test Purpose ---------------------- */}
         <Stack.Screen name="Test" component={Test} />
         <Stack.Screen name="CommonCustomCard" component={CommonCustomCard} />
         <Stack.Screen name="QrCodeScanner" component={QrCodeScanner} />
         <Stack.Screen name="ViewPass" component={ViewPass} />
-        {/* terms -------------------------- */}
+        {/* ---------------------------- terms -------------------------- */}
         <Stack.Screen name="TermAndConditon" component={TermAndConditon} />
         <Stack.Screen name="TestingScreen" component={TestingScreen} />
    
